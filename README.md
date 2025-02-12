@@ -7,6 +7,8 @@
 - [白黒ドット絵フィルター](./scripts/halftone-dot-filter/README.md) - 映像を白黒のドット絵に変換
 - [モザイクフィルター](./scripts/mosaic-filter/README.md) - 映像にモザイクをかける
 
+使い方については、各スクリプトのREADMEをご覧ください。
+
 ## 🔗 関連ツール
 
 - [Alive Studio byGMOペパボ](https://alive-project.com/studio) - 配信画面デザインサービス
