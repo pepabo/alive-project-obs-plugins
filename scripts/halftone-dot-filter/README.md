@@ -8,8 +8,12 @@
 
 ## 🔧 インストール方法
 
-1. OBSメニューの「ツール」→「スクリプト」を選択
-2. 「+」ボタンをクリックし、「halftone-dot-filter.lua」を選択
+1. [`halftone-dot-filter.lua`](https://raw.githubusercontent.com/pepabo/alive-project-obs-plugins/main/scripts/halftone-dot-filter/halftone-dot-filter.lua)をダウンロード
+2. OBSメニューの「ツール」→「スクリプト」を選択
+3. 「+」ボタンをクリックし、ダウンロードした「halftone-dot-filter.lua」を選択
+4. 「有効なプロパティがありません」と表示されますが、これは正常です
+
+その後、以下の手順でフィルターを適用できます：
 
 ## 🎬 フィルター適用方法
 
