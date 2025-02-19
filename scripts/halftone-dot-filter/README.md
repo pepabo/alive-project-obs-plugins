@@ -8,7 +8,7 @@
 
 ## 🔧 インストール方法
 
-1. [`halftone-dot-filter.lua`](https://raw.githubusercontent.com/pepabo/alive-project-obs-plugins/main/scripts/halftone-dot-filter/halftone-dot-filter.lua)をダウンロード
+1. <a href="https://raw.githubusercontent.com/pepabo/alive-project-obs-plugins/main/scripts/halftone-dot-filter/halftone-dot-filter.lua" download="halftone-dot-filter.lua">halftone-dot-filter.lua をダウンロード</a>
 2. OBSメニューの「ツール」→「スクリプト」を選択
 3. 「+」ボタンをクリックし、ダウンロードした「halftone-dot-filter.lua」を選択
 4. 「有効なプロパティがありません」と表示されますが、これは正常です
