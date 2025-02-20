@@ -12,7 +12,7 @@
     <details><summary>ダウンロード方法</summary>
 
     - リンクを右クリックして、「リンク先を別名で保存」を選択するとダウンロードできます。
-    ![ダウンロード方法](./download.png)
+    ![ダウンロード方法](./download_mosaic.png)
     </details> 
 
 2. OBSメニューの「ツール」→「スクリプト」を選択
