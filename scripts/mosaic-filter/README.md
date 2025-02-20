@@ -9,11 +9,9 @@
 ## 🔧 インストール方法
 
 1. [`mosaic-filter.lua`](https://raw.githubusercontent.com/pepabo/alive-project-obs-plugins/main/scripts/mosaic-filter/mosaic-filter.lua)をダウンロード
-    <details><summary>ダウンロード方法</summary>
 
     - リンクを右クリックして、「リンク先を別名で保存」を選択するとダウンロードできます。
     ![ダウンロード方法](./download_mosaic.png)
-    </details> 
 
 2. OBSメニューの「ツール」→「スクリプト」を選択
 3. 「+」ボタンをクリックし、ダウンロードした「mosaic-filter.lua」を選択
