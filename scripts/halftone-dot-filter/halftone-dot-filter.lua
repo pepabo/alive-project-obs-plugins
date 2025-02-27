@@ -25,8 +25,8 @@ local CONSTANTS = {
     DEFAULT_DOT_SIZE = 12,
     DEFAULT_TONE = 8,
     DEFAULT_ENABLED = true,
-    DEFAULT_DOT_COLOR = 0x000000FF, -- 黒 (RGBA形式)
-    DEFAULT_BG_COLOR = 0xFFFFFFFF,  -- 白 (RGBA形式)
+    DEFAULT_DOT_COLOR = 0xFF000000, -- 黒 (ABGR形式)
+    DEFAULT_BG_COLOR = 0xFFFFFFFF,  -- 白 (ABGR形式)
 
     -- 説明文
     DESCRIPTION = {
