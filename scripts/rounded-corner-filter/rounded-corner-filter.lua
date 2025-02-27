@@ -1,14 +1,20 @@
 obs = obslua
 
--- 定数定義（シンプル版）
-local FILTER_NAME = "角丸フィルター"
-local SETTING_RADIUS = "radius"
-local SETTING_DEBUG = "debug_mode"
-
--- 枠線設定
-local SETTING_BORDER = "border_enabled"
-local SETTING_BORDER_SIZE = "border_size"
-local SETTING_BORDER_COLOR = "border_color"
+-- 定数
+local CONSTANTS = {
+    VERSION = "1.0.0",
+    FILTER_NAME = "角丸フィルター",
+    
+    -- 設定キー
+    SETTING_RADIUS = "radius",
+    SETTING_DEBUG = "debug_mode",
+    SETTING_VERSION = "version",
+    
+    -- 枠線設定
+    SETTING_BORDER = "border_enabled",
+    SETTING_BORDER_SIZE = "border_size",
+    SETTING_BORDER_COLOR = "border_color"
+}
 
 -- ソース定義
 source_def = {}
@@ -47,7 +53,7 @@ end
 
 -- フィルター名取得
 source_def.get_name = function()
-    return FILTER_NAME
+    return CONSTANTS.FILTER_NAME
 end
 
 -- フィルター作成
@@ -115,13 +121,13 @@ end
 -- 設定更新
 source_def.update = function(filter, settings)
     -- 基本設定
-    filter.radius = obs.obs_data_get_int(settings, SETTING_RADIUS)
-    filter.debug_mode = obs.obs_data_get_bool(settings, SETTING_DEBUG)
+    filter.radius = obs.obs_data_get_int(settings, CONSTANTS.SETTING_RADIUS)
+    filter.debug_mode = obs.obs_data_get_bool(settings, CONSTANTS.SETTING_DEBUG)
     
     -- 枠線設定
-    filter.border_enabled = obs.obs_data_get_bool(settings, SETTING_BORDER)
-    filter.border_size = obs.obs_data_get_int(settings, SETTING_BORDER_SIZE)
-    filter.border_color = obs.obs_data_get_int(settings, SETTING_BORDER_COLOR)
+    filter.border_enabled = obs.obs_data_get_bool(settings, CONSTANTS.SETTING_BORDER)
+    filter.border_size = obs.obs_data_get_int(settings, CONSTANTS.SETTING_BORDER_SIZE)
+    filter.border_color = obs.obs_data_get_int(settings, CONSTANTS.SETTING_BORDER_COLOR)
 end
 
 -- レンダリング処理
@@ -161,17 +167,21 @@ source_def.get_properties = function(settings)
     local props = obs.obs_properties_create()
     
     -- 角丸半径の設定
-    obs.obs_properties_add_int_slider(props, SETTING_RADIUS, "角丸の半径", 0, 200, 1)
+    obs.obs_properties_add_int_slider(props, CONSTANTS.SETTING_RADIUS, "角丸の半径", 0, 200, 1)
     
     -- 枠線設定グループ
     local border_group = obs.obs_properties_create()
-    obs.obs_properties_add_bool(border_group, SETTING_BORDER, "枠線を表示")
-    obs.obs_properties_add_int_slider(border_group, SETTING_BORDER_SIZE, "枠線の太さ", 1, 20, 1)
-    obs.obs_properties_add_color(border_group, SETTING_BORDER_COLOR, "枠線の色")
+    obs.obs_properties_add_bool(border_group, CONSTANTS.SETTING_BORDER, "枠線を表示")
+    obs.obs_properties_add_int_slider(border_group, CONSTANTS.SETTING_BORDER_SIZE, "枠線の太さ", 1, 20, 1)
+    obs.obs_properties_add_color(border_group, CONSTANTS.SETTING_BORDER_COLOR, "枠線の色")
     obs.obs_properties_add_group(props, "border_group", "枠線設定", obs.OBS_GROUP_NORMAL, border_group)
     
     -- デバッグモードの切り替え
-    obs.obs_properties_add_bool(props, SETTING_DEBUG, "デバッグモード (赤色表示)")
+    obs.obs_properties_add_bool(props, CONSTANTS.SETTING_DEBUG, "デバッグモード (赤色表示)")
+    
+    -- バージョン情報（無効化状態で表示）
+    local version_prop = obs.obs_properties_add_text(props, CONSTANTS.SETTING_VERSION, "バージョン", obs.OBS_TEXT_DEFAULT)
+    obs.obs_property_set_enabled(version_prop, false)
     
     return props
 end
@@ -179,13 +189,16 @@ end
 -- デフォルト値設定
 source_def.get_defaults = function(settings)
     -- 基本設定
-    obs.obs_data_set_default_int(settings, SETTING_RADIUS, 30)
-    obs.obs_data_set_default_bool(settings, SETTING_DEBUG, false)
+    obs.obs_data_set_default_int(settings, CONSTANTS.SETTING_RADIUS, 30)
+    obs.obs_data_set_default_bool(settings, CONSTANTS.SETTING_DEBUG, false)
     
     -- 枠線設定
-    obs.obs_data_set_default_bool(settings, SETTING_BORDER, true)
-    obs.obs_data_set_default_int(settings, SETTING_BORDER_SIZE, 2)
-    obs.obs_data_set_default_int(settings, SETTING_BORDER_COLOR, 0xFFFFFFFF)
+    obs.obs_data_set_default_bool(settings, CONSTANTS.SETTING_BORDER, true)
+    obs.obs_data_set_default_int(settings, CONSTANTS.SETTING_BORDER_SIZE, 2)
+    obs.obs_data_set_default_int(settings, CONSTANTS.SETTING_BORDER_COLOR, 0xFFFFFFFF)
+    
+    -- バージョン情報の設定
+    obs.obs_data_set_string(settings, CONSTANTS.SETTING_VERSION, CONSTANTS.VERSION)
 end
 
 -- 定期更新
@@ -205,7 +218,12 @@ end
 -- スクリプト説明
 function script_description()
     return [[<h3>角丸フィルター</h3>
-    <p>映像ソースに角丸と枠線効果を適用します。効果を確認するには対象ソースの下に背景を配置してください。</p>]]
+    <p>映像ソースに角丸効果と枠線を適用します。映像の四隅が透明になるエフェクトです。</p>]]
+end
+
+-- バージョン情報
+function script_version()
+    return CONSTANTS.VERSION
 end
 
 -- スクリプト読み込み
