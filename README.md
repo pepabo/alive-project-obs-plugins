@@ -4,7 +4,7 @@
 
 ## 🛠️ スクリプト一覧
 
-- [白黒ドット絵フィルター](./scripts/halftone-dot-filter/README.md) - 映像を白黒のドット絵に変換
+- [ドット絵フィルター](./scripts/halftone-dot-filter/README.md) - 映像をドット絵に変換
 - [モザイクフィルター](./scripts/mosaic-filter/README.md) - 映像にモザイクをかける
 
 使い方については、各スクリプトのREADMEをご覧ください。
