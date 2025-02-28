@@ -219,7 +219,7 @@ end
 function script_description()
     return [[<h3>角丸フィルター</h3>
     <p>映像ソースに角丸効果と枠線を適用します。映像の四隅が透明になるエフェクトです。</p>
-    <p>© Alive Project byGMOペパボ</p>]]
+    <p>© <a href="https://alive-project.com/">Alive Project byGMOペパボ</a></p>]]
 end
 
 -- バージョン情報
