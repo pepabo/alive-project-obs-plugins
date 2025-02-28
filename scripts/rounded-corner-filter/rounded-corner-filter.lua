@@ -16,6 +16,18 @@ local CONSTANTS = {
     SETTING_BORDER_COLOR = "border_color"
 }
 
+DESCRIPTION = {
+    TITLE = "角丸フィルター",
+    BODY = "映像ソースに角丸効果と枠線を適用します。映像の四隅が透明になるエフェクトです。",
+    COPYRIGHT = {
+        NAME = "Alive Project byGMOペパボ",
+        URL = "https://alive-project.com/"
+    },
+    HTML = [[<h3>%s</h3>
+    <p>%s</p>
+    <p>© <a href="%s">%s</a></p>]]
+}
+
 -- ソース定義
 source_def = {}
 source_def.id = "rounded_corner_filter"
@@ -217,9 +229,7 @@ end
 
 -- スクリプト説明
 function script_description()
-    return [[<h3>角丸フィルター</h3>
-    <p>映像ソースに角丸効果と枠線を適用します。映像の四隅が透明になるエフェクトです。</p>
-    <p>© <a href="https://alive-project.com/">Alive Project byGMOペパボ</a></p>]]
+    return string.format(DESCRIPTION.HTML, DESCRIPTION.TITLE, DESCRIPTION.BODY, DESCRIPTION.COPYRIGHT.URL, DESCRIPTION.COPYRIGHT.NAME)
 end
 
 -- バージョン情報
