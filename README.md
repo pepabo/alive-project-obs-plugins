@@ -7,6 +7,7 @@
 - [ドット絵フィルター](./scripts/halftone-dot-filter/README.md) - 映像をドット絵に変換
 - [モザイクフィルター](./scripts/mosaic-filter/README.md) - 映像にモザイクをかける
 - [角丸フィルター](./scripts/rounded-corner-filter/README.md) - 映像に角丸効果を追加
+- [アニメーション](./scripts/animation-filter/README.md) - 映像にアニメーションを追加
 
 使い方については、各スクリプトのREADMEをご覧ください。
 
