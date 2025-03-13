@@ -8,6 +8,7 @@
 - [モザイクフィルター](./scripts/mosaic-filter/README.md) - 映像にモザイクをかける
 - [角丸フィルター](./scripts/rounded-corner-filter/README.md) - 映像に角丸効果を追加
 - [アニメーション](./scripts/animation-filter/README.md) - 映像にアニメーションを追加
+- [顔ハメパネル](./scripts/face-hole-filter/README.md) - 映像に顔ハメパネルを追加
 
 使い方については、各スクリプトのREADMEをご覧ください。
 
