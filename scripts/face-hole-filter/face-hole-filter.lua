@@ -12,8 +12,6 @@ local CONSTANTS = {
     TEXT_HOLE_Y = "穴の位置 Y",
     TEXT_HOLE_WIDTH = "穴の幅",
     TEXT_HOLE_HEIGHT = "穴の高さ",
-    TEXT_RESET_POSITION = "位置をリセット",
-    TEXT_RESET_SIZE = "サイズをリセット",
     TEXT_SMOOTHNESS = "エッジの滑らかさ",
     
     -- 設定キー
@@ -135,25 +133,6 @@ local function set_render_size(filter)
     filter.height = obs.obs_source_get_base_height(target)
 end
 
--- 位置リセットコールバック
-local function reset_position_button_clicked(props, prop, data)
-    local settings = obs.obs_data_create()
-    obs.obs_data_set_double(settings, CONSTANTS.SETTING_HOLE_X, CONSTANTS.DEFAULT_HOLE_X)
-    obs.obs_data_set_double(settings, CONSTANTS.SETTING_HOLE_Y, CONSTANTS.DEFAULT_HOLE_Y)
-    obs.obs_properties_apply_settings(props, settings)
-    obs.obs_data_release(settings)
-    return true
-end
-
--- サイズリセットコールバック
-local function reset_size_button_clicked(props, prop, data)
-    local settings = obs.obs_data_create()
-    obs.obs_data_set_double(settings, CONSTANTS.SETTING_HOLE_WIDTH, CONSTANTS.DEFAULT_HOLE_WIDTH)
-    obs.obs_data_set_double(settings, CONSTANTS.SETTING_HOLE_HEIGHT, CONSTANTS.DEFAULT_HOLE_HEIGHT)
-    obs.obs_properties_apply_settings(props, settings)
-    obs.obs_data_release(settings)
-    return true
-end
 
 -- フィルター名取得
 source_def.get_name = function()
@@ -296,10 +275,6 @@ source_def.get_properties = function()
                                        CONSTANTS.TEXT_HOLE_Y, 
                                        0.0, 1.0, 0.01)
     
-    -- 位置リセットボタン
-    obs.obs_properties_add_button(props, "reset_position", CONSTANTS.TEXT_RESET_POSITION, 
-                                 reset_position_button_clicked)
-    
     -- 穴のサイズ設定
     obs.obs_properties_add_float_slider(props, CONSTANTS.SETTING_HOLE_WIDTH, 
                                        CONSTANTS.TEXT_HOLE_WIDTH, 
@@ -308,10 +283,6 @@ source_def.get_properties = function()
     obs.obs_properties_add_float_slider(props, CONSTANTS.SETTING_HOLE_HEIGHT, 
                                        CONSTANTS.TEXT_HOLE_HEIGHT, 
                                        0.01, 1.0, 0.01)
-    
-    -- サイズリセットボタン
-    obs.obs_properties_add_button(props, "reset_size", CONSTANTS.TEXT_RESET_SIZE, 
-                                 reset_size_button_clicked)
     
     -- エッジの滑らかさ
     obs.obs_properties_add_float_slider(props, CONSTANTS.SETTING_SMOOTHNESS, 
