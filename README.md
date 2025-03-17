@@ -9,6 +9,8 @@
 - [角丸フィルター](./scripts/rounded-corner-filter/README.md) - 映像に角丸効果を追加
 - [アニメーション](./scripts/animation-filter/README.md) - 映像にアニメーションを追加
 - [顔ハメパネル](./scripts/face-hole-filter/README.md) - 映像に顔ハメパネルを追加
+- [回転フィルター](./scripts/rotation-filter/README.md) - 映像を回転させる
+- [3D回転フィルター](./scripts/3drotation-filter/README.md) - 映像を3D的に回転させる
 
 使い方については、各スクリプトのREADMEをご覧ください。
 
