@@ -45,6 +45,14 @@ function source_def.create(settings, source)
   filter.height = 0
   filter.settings = settings
 
+  -- エフェクトの初期化
+  if draw_effect == nil then
+    obs.obs_enter_graphics()
+    draw_effect = obs.gs_effect_create(
+      "uniform float4x4 viewproj; uniform texture2d image; struct VertData { float4 pos : POSITION; float2 uv  : TEXCOORD0; }; VertData VSDefault( VertData v_in) { VertData vert_out; vert_out.pos = mul(float4(v_in.pos.xyz, 1.0), viewproj); vert_out.uv  = v_in.uv; return vert_out; }; float4 PSDrawBare(VertData v_in) : TARGET { return image.Sample(LinearClampSampler, v_in.uv); }; technique Draw { pass { vertex_shader = VSDefault(v_in); pixel_shader  = PSDrawBare(v_in); } }")
+    obs.obs_leave_graphics()
+  end
+
   -- 設定の読み込み
   update_settings(filter, settings)
 
@@ -181,36 +189,23 @@ function draw_afterimages(filter, width, height)
 
   -- 残像描画のブレンド設定
   obs.gs_blend_state_push()
-  obs.gs_blend_function(obs.GS_BLEND_ONE, obs.GS_BLEND_INVSRCALPHA)
-
-  obs.gs_matrix_push()
-  obs.gs_matrix_identity()
+  obs.gs_blend_function(obs.GS_BLEND_SRCALPHA, obs.GS_BLEND_INVSRCALPHA)
 
   -- 各フレームを描画
   for i, frame in ipairs(captured_frames) do
     if i > 1 then -- 最新のフレームは除外（すでに通常描画されているため）
-      -- テクスチャを設定
-      local effect = obs.gs_effect_create("draw_image", nil, nil)
-      if effect ~= nil then
-        local param = obs.gs_effect_get_param_by_name(effect, "image")
-        obs.gs_effect_set_texture(param, frame.texture)
+      -- 色情報を設定（アルファ値を透明度とする）
+      local color = { r = 1.0, g = 1.0, b = 1.0, a = frame.opacity }
 
-        local param_opacity = obs.gs_effect_get_param_by_name(effect, "opacity")
-        obs.gs_effect_set_float(param_opacity, frame.opacity)
-
-        -- 描画
-        while obs.gs_effect_loop(effect, "Draw") do
-          obs.gs_draw_sprite(frame.texture, 0, width, height)
-        end
-
-        obs.gs_effect_destroy(effect)
-      end
+      -- スプライトとして描画
+      obs.gs_matrix_push()
+      obs.gs_matrix_identity()
+      obs.gs_draw_sprite_with_color(frame.texture, 0, width, height, color)
+      obs.gs_matrix_pop()
     end
   end
 
-  obs.gs_matrix_pop()
   obs.gs_blend_state_pop()
-
   obs.obs_leave_graphics()
 end
 
