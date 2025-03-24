@@ -33,9 +33,36 @@ source_def.type = obs.OBS_SOURCE_TYPE_FILTER
 source_def.output_flags = obs.OBS_SOURCE_VIDEO
 
 -- グローバル変数
-local last_capture_time = 0
 local captured_frames = {}
-local texrender = nil
+
+-- シェーダーコード
+local effect_code = [[
+  uniform float4x4 viewproj;
+  uniform texture2d image;
+
+  struct VertData {
+    float4 pos : POSITION;
+    float2 uv  : TEXCOORD0;
+  };
+
+  VertData VSDefault(VertData v_in) {
+    VertData vert_out;
+    vert_out.pos = mul(float4(v_in.pos.xyz, 1.0), viewproj);
+    vert_out.uv  = v_in.uv;
+    return vert_out;
+  }
+
+  float4 PSDrawBare(VertData v_in) : TARGET {
+    return image.Sample(LinearClampSampler, v_in.uv);
+  }
+
+  technique Draw {
+    pass {
+      vertex_shader = VSDefault(v_in);
+      pixel_shader  = PSDrawBare(v_in);
+    }
+  }
+]]
 
 -- フィルターの作成時に呼ばれる
 function source_def.create(settings, source)
@@ -44,13 +71,17 @@ function source_def.create(settings, source)
   filter.width = 0
   filter.height = 0
   filter.settings = settings
+  filter.last_capture_time = 0
+  filter.texrender = nil
 
   -- エフェクトの初期化
-  if draw_effect == nil then
-    obs.obs_enter_graphics()
-    draw_effect = obs.gs_effect_create(
-      "uniform float4x4 viewproj; uniform texture2d image; struct VertData { float4 pos : POSITION; float2 uv  : TEXCOORD0; }; VertData VSDefault( VertData v_in) { VertData vert_out; vert_out.pos = mul(float4(v_in.pos.xyz, 1.0), viewproj); vert_out.uv  = v_in.uv; return vert_out; }; float4 PSDrawBare(VertData v_in) : TARGET { return image.Sample(LinearClampSampler, v_in.uv); }; technique Draw { pass { vertex_shader = VSDefault(v_in); pixel_shader  = PSDrawBare(v_in); } }")
-    obs.obs_leave_graphics()
+  obs.obs_enter_graphics()
+  filter.effect = obs.gs_effect_create(effect_code, nil, nil)
+  obs.obs_leave_graphics()
+
+  if filter.effect == nil then
+    source_def.destroy(filter)
+    return nil
   end
 
   -- 設定の読み込み
@@ -87,18 +118,18 @@ function source_def.video_render(filter, effect)
     filter.height = height
 
     -- テクスチャレンダラを再作成
-    if texrender ~= nil then
+    if filter.texrender ~= nil then
       obs.obs_enter_graphics()
-      obs.gs_texrender_destroy(texrender)
-      texrender = nil
+      obs.gs_texrender_destroy(filter.texrender)
+      filter.texrender = nil
       obs.obs_leave_graphics()
     end
   end
 
   -- テクスチャレンダラの作成（必要な場合）
-  if texrender == nil then
+  if filter.texrender == nil and width > 0 and height > 0 then
     obs.obs_enter_graphics()
-    texrender = obs.gs_texrender_create(obs.GS_RGBA, obs.GS_ZS_NONE)
+    filter.texrender = obs.gs_texrender_create(obs.GS_RGBA, obs.GS_ZS_NONE)
     obs.obs_leave_graphics()
   end
 
@@ -106,8 +137,8 @@ function source_def.video_render(filter, effect)
   local current_time = obs.os_gettime_ns() / 1000000000.0
 
   -- 一定間隔でキャプチャを行う
-  if current_time - last_capture_time >= filter.capture_interval then
-    last_capture_time = current_time
+  if current_time - filter.last_capture_time >= filter.capture_interval then
+    filter.last_capture_time = current_time
     capture_frame(filter, parent, width, height)
   end
 
@@ -124,14 +155,14 @@ end
 
 -- フレームをキャプチャする関数
 function capture_frame(filter, source, width, height)
-  if width <= 0 or height <= 0 then
+  if width <= 0 or height <= 0 or filter.texrender == nil then
     return
   end
 
   obs.obs_enter_graphics()
 
   -- テクスチャレンダラの設定
-  if not obs.gs_texrender_begin(texrender, width, height) then
+  if not obs.gs_texrender_begin(filter.texrender, width, height) then
     obs.obs_leave_graphics()
     return
   end
@@ -141,22 +172,15 @@ function capture_frame(filter, source, width, height)
   obs.gs_clear(obs.GS_CLEAR_COLOR + obs.GS_CLEAR_DEPTH)
 
   -- ソースを描画
-  local param = {}
-  param.source = source
-  param.x = 0
-  param.y = 0
-  param.cx = width
-  param.cy = height
-
   obs.gs_blend_state_push()
   obs.gs_blend_function(obs.GS_BLEND_ONE, obs.GS_BLEND_ZERO)
   obs.obs_source_video_render(source)
   obs.gs_blend_state_pop()
 
-  obs.gs_texrender_end(texrender)
+  obs.gs_texrender_end(filter.texrender)
 
   -- テクスチャを取得
-  local texture = obs.gs_texrender_get_texture(texrender)
+  local texture = obs.gs_texrender_get_texture(filter.texrender)
 
   if texture ~= nil then
     -- 新しいフレームを保存
@@ -181,7 +205,7 @@ end
 
 -- 残像を描画する関数
 function draw_afterimages(filter, width, height)
-  if #captured_frames == 0 then
+  if #captured_frames == 0 or filter.effect == nil then
     return
   end
 
@@ -240,9 +264,14 @@ function source_def.destroy(filter)
     obs.gs_texture_destroy(frame.texture)
   end
 
-  if texrender ~= nil then
-    obs.gs_texrender_destroy(texrender)
-    texrender = nil
+  if filter.texrender ~= nil then
+    obs.gs_texrender_destroy(filter.texrender)
+    filter.texrender = nil
+  end
+
+  if filter.effect ~= nil then
+    obs.gs_effect_destroy(filter.effect)
+    filter.effect = nil
   end
 
   captured_frames = {}
