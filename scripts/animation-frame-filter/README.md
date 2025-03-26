@@ -4,9 +4,8 @@
 
 ## 🎥 使用例
 
-![フィルター適用](./screenshot.png)
+![フィルター適用](./animation-frame-filter.png)
 
-*（スクリーンショットはご自身で作成したものに置き換えてください）*
 
 ## 🔧 インストール方法
 
@@ -78,3 +77,10 @@
 [![Alive Studio](../../assets/alive-studio-logo.png)](https://alive-project.com/studio)
 
 © 2025 GMO Pepabo, Inc. All rights reserved. 
+
+＜動画内ゲーム＞ 
+タイトル：みんなで空気読み。4
+プラットフォーム：Nintendo Switch、Steam
+Nintendo Switch：https://store-jp.nintendo.com/item/software/D70010000088681
+Steam：https://store.steampowered.com/app/3140130/4/
+©G-MODE Corporation

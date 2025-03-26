@@ -4,7 +4,7 @@
 
 ## 🎥 使用例
 
-![フィルター適用](./screenshot.png)
+![フィルター適用](./transition-filter.gif)
 
 ## 🔧 インストール方法
 
