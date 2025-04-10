@@ -13,6 +13,7 @@
 - [3D回転フィルター](./scripts/3drotation-filter/README.md) - 映像を3D的に回転させる
 - [アニメーションフレーム](./scripts/animation-frame-filter/README.md) - 映像にアニメーションフレームを追加
 - [トランジションフィルター](./scripts/transition-filter/README.md) - 映像にトランジション効果を追加
+- [フィルムカメラフィルター](./scripts/film-camera-filter/README.md) - 映像にフィルムカメラのような質感を追加
 
 使い方については、各スクリプトのREADMEをご覧ください。
 
