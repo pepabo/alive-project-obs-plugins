@@ -16,6 +16,9 @@
 - [フィルムカメラフィルター](./scripts/film-camera-filter/README.md) - 映像にフィルムカメラのような質感を追加
 - [スポットライト](./scripts/spotlight-filter/README.md) - 映像にスポットライトを追加
 - [振り子フィルター](./scripts/pendulum-filter/README.md) - 映像を振り子のように揺らす
+- [ピンフィルター](./scripts/pin-filter/README.md) - 映像にピン型のフィルターを追加
+
+
 使い方については、各スクリプトのREADMEをご覧ください。
 
 ## 🔗 関連ツール
