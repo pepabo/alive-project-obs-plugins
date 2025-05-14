@@ -158,10 +158,10 @@ source_def.get_properties = function(settings)
     local props = obs.obs_properties_create()
     
     -- 円の半径設定
-    obs.obs_properties_add_int_slider(props, CONSTANTS.SETTING_RADIUS, "円の半径", 10, 500, 1)
+    obs.obs_properties_add_int_slider(props, CONSTANTS.SETTING_RADIUS, "円の半径", 10, 1000, 1)
     
     -- 三角マークのサイズ設定
-    obs.obs_properties_add_int_slider(props, CONSTANTS.SETTING_TRIANGLE_SIZE, "三角マークのサイズ", 5, 50, 1)
+    obs.obs_properties_add_int_slider(props, CONSTANTS.SETTING_TRIANGLE_SIZE, "三角マークのサイズ", 5, 100, 1)
     
     -- 色設定
     obs.obs_properties_add_color(props, CONSTANTS.SETTING_COLOR, "枠の色")
@@ -296,9 +296,9 @@ float4 PS(VertData v_in) : TARGET {
     }
     
     // 円の枠線の描画（より太く、影付き）
-    if (dist > (radius - 45.0)) {  // 枠線を45ピクセルに
+    if (dist > (radius - 67.5)) {  // 枠線を67.5ピクセルに (45 * 1.5)
         // 外側ほど影を濃く
-        float shadow_intensity = (dist - (radius - 45.0)) / 45.0;
+        float shadow_intensity = (dist - (radius - 67.5)) / 67.5;
         return lerp(shadow_color, float4(color_r, color_g, color_b, color_a), shadow_intensity);
     }
     
