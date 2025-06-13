@@ -17,6 +17,7 @@
 - [スポットライト](./scripts/spotlight-filter/README.md) - 映像にスポットライトを追加
 - [振り子フィルター](./scripts/pendulum-filter/README.md) - 映像を振り子のように揺らす
 - [ピンフィルター](./scripts/pin-filter/README.md) - 映像にピン型のフィルターを追加
+- [水中効果フィルター](./scripts/water-immersion-filter/README.md) - 映像に水中効果を追加
 
 
 使い方については、各スクリプトのREADMEをご覧ください。
