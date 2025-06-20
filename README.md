@@ -19,6 +19,8 @@
 - [ピンフィルター](./scripts/pin-filter/README.md) - 映像にピン型のフィルターを追加
 - [水中効果フィルター](./scripts/water-immersion-filter/README.md) - 映像に水中効果を追加
 - [ポップアウトワイプフィルター](./scripts/popout-wipe-filter/README.md) - 映像にポップアウトワイプ効果を追加
+- [影フィルター](./scripts/drop-shadow-filter/README.md) - 映像に影を追加
+- [ルーペフィルター](./scripts/magnifier-filter/README.md) - 映像にルーペを追加
 
 使い方については、各スクリプトのREADMEをご覧ください。
 
