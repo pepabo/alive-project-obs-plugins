@@ -8,7 +8,7 @@ VTuberや配信映像の背後に、自然なドロップシャドウ（影）�
 
 ## 🔧 インストール方法
 
-1. [`drop-shadow-filter.lua`](./drop-shadow-filter.lua) をダウンロード
+1. [`drop-shadow-filter.lua`](https://raw.githubusercontent.com/pepabo/alive-project-obs-plugins/main/scripts/drop-shadow-filter/drop-shadow-filter.lua) をダウンロード
 2. OBSメニューの「ツール」→「スクリプト」を選択
 3. 「+」ボタンをクリックし、ダウンロードした「drop-shadow-filter.lua」を選択
 4. 「有効なプロパティがありません」と表示されますが、これは正常です
@@ -45,4 +45,4 @@ VTuberや配信映像の背後に、自然なドロップシャドウ（影）�
 
 [![Alive Studio](../../assets/alive-studio-logo.png)](https://alive-project.com/studio)
 
-© 2025 GMO Pepabo, Inc. All rights reserved. 
+© 2025 GMO Pepabo, Inc. All rights reserved.  
