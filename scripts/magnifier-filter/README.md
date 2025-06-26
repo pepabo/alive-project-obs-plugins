@@ -14,7 +14,7 @@
 
 ## 🔧 インストール方法
 
-1. [`magnifier-filter.lua`](./magnifier-filter.lua) をダウンロード
+1. [`magnifier-filter.lua`](https://raw.githubusercontent.com/pepabo/alive-project-obs-plugins/main/scripts/magnifier-filter/magnifier-filter.lua) をダウンロード
 2. OBSメニューの「ツール」→「スクリプト」を選択
 3. "+"ボタンをクリックし、ダウンロードした「magnifier-filter.lua」を選択
 4. "有効なプロパティがありません"と表示されますが、これは正常です
@@ -61,4 +61,4 @@
 
 [![Alive Studio](../../assets/alive-studio-logo.png)](https://alive-project.com/studio)
 
-© 2025 GMO Pepabo, Inc. All rights reserved. 
+© 2025 GMO Pepabo, Inc. All rights reserved.  
