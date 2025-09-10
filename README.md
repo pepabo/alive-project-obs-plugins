@@ -21,6 +21,7 @@
 - [ポップアウトワイプフィルター](./scripts/popout-wipe-filter/README.md) - 映像にポップアウトワイプ効果を追加
 - [影フィルター](./scripts/drop-shadow-filter/README.md) - 映像に影を追加
 - [ルーペフィルター](./scripts/magnifier-filter/README.md) - 映像にルーペを追加
+- [風景ループフィルター](./scripts/landscape-loop-filter/README.md) - 映像の風景をループさせる効果を追加
 
 使い方については、各スクリプトのREADMEをご覧ください。
 
