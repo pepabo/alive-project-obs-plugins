@@ -1,0 +1,8 @@
+baseURL = "https://pepabo.github.io/alive-project-obs-plugins/"
+languageCode = "ja"
+title = "OBSプラグイン集 - Alive Project"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}</title>
+  <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="{{ "" | relURL }}" class="site-logo">
+        <img src="{{ "assets/alive-studio-logo.png" | relURL }}" alt="Alive Studio" class="logo-img">
+        <span class="site-name">OBSプラグイン集</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="site-main">
+    {{ block "main" . }}{{ end }}
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2025 GMO Pepabo, Inc. All rights reserved.</p>
+  </footer>
+</body>
+</html>
