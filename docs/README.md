@@ -1,5 +1,9 @@
 # GitHub Pages サイト
 
+このリポジトリのscriptsフォルダに追加されたReadMe.mdファイルは以下のURLで公開されます
+
+https://pepabo.github.io/alive-project-obs-plugins/
+
 このディレクトリには、GitHub Pages で公開するサイトの Hugo ソースファイルが含まれています。
 
 ## 構成
@@ -50,3 +54,20 @@ bash docs/generate-content.sh
 # 開発サーバー起動
 cd docs && hugo server
 ```
+
+## サイトデザインの変更方法
+
+| 変更したい内容 | 修正するファイル |
+|---|---|
+| 色・フォント・レイアウト | `static/css/style.css` |
+| ヘッダー・フッター | `layouts/_default/baseof.html` |
+| トップページ（カード一覧） | `layouts/_default/list.html` |
+| フィルター個別ページ | `layouts/_default/single.html` |
+| サイト名・baseURL | `hugo.toml` |
+| トップページの説明文 | `layouts/_default/list.html` 内の `site-description` |
+
+
+layouts内に現れる謎の構文についてはここを参照してください
+
+Hugo テンプレート入門
+https://juggernautjp.info/templates/introduction/
