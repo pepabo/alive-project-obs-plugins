@@ -1,0 +1,16 @@
+{{ define "main" }}
+<article class="single-page">
+  <nav class="breadcrumb">
+    <a href="{{ "" | relURL }}">&larr; 一覧に戻る</a>
+  </nav>
+
+  <div class="content">
+    <h1>{{ .Title }}</h1>
+    {{ .Content }}
+  </div>
+
+  <nav class="breadcrumb breadcrumb-bottom">
+    <a href="{{ "" | relURL }}">&larr; 一覧に戻る</a>
+  </nav>
+</article>
+{{ end }}

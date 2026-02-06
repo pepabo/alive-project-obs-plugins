@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}</title>
+  <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="{{ "" | relURL }}" class="site-logo">
+        <img src="{{ "assets/alive-studio-logo.png" | relURL }}" alt="Alive Studio" class="logo-img">
+        <span class="site-name">OBSプラグイン集</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="site-main">
+    {{ block "main" . }}{{ end }}
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2025 GMO Pepabo, Inc. All rights reserved.</p>
+  </footer>
+  <script>
+  document.addEventListener("click", function(e) {
+    var a = e.target.closest('a[href$=".lua"]');
+    if (!a) return;
+    e.preventDefault();
+    var url = a.href;
+    var filename = url.split("/").pop();
+    fetch(url).then(function(r) { return r.blob(); }).then(function(blob) {
+      var link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = filename;
+      link.click();
+      URL.revokeObjectURL(link.href);
+    });
+  });
+  </script>
+</body>
+</html>

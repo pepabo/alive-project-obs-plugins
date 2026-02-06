@@ -1,0 +1,30 @@
+{{ define "main" }}
+<div class="list-page">
+  <section class="site-description">
+    <p><a href="https://alive-project.com/" target="_blank" rel="noopener">Alive Project byGMOペパボ</a>が提供する、OBSをもっと便利に使える配信支援ツール集です。</p>
+  </section>
+
+  <section class="filter-list">
+    <div class="card-grid">
+      {{ $filters := where .Site.RegularPages "Section" "filters" }}
+      {{ range $filters }}
+      <a href="{{ .RelPermalink }}" class="card">
+        {{ $page := . }}
+        {{ with .Params.thumbnail }}
+        {{ $img := $page.Resources.GetMatch . }}
+        {{ if $img }}
+        <div class="card-image">
+          <img src="{{ $img.RelPermalink }}" alt="{{ $page.Title }}" loading="lazy">
+        </div>
+        {{ end }}
+        {{ end }}
+        <div class="card-body">
+          <h2 class="card-title">{{ .Title }}</h2>
+          {{ with .Description }}<p class="card-description">{{ . }}</p>{{ end }}
+        </div>
+      </a>
+      {{ end }}
+    </div>
+  </section>
+</div>
+{{ end }}
