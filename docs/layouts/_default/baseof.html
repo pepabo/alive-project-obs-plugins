@@ -23,5 +23,21 @@
   <footer class="site-footer">
     <p>&copy; 2025 GMO Pepabo, Inc. All rights reserved.</p>
   </footer>
+  <script>
+  document.addEventListener("click", function(e) {
+    var a = e.target.closest('a[href$=".lua"]');
+    if (!a) return;
+    e.preventDefault();
+    var url = a.href;
+    var filename = url.split("/").pop();
+    fetch(url).then(function(r) { return r.blob(); }).then(function(blob) {
+      var link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = filename;
+      link.click();
+      URL.revokeObjectURL(link.href);
+    });
+  });
+  </script>
 </body>
 </html>
