@@ -37,8 +37,8 @@ for filter_dir in "${SCRIPTS_DIR}"/*/; do
   # Extract title from first line (e.g., "# 🎭 スポットライト")
   title="$(head -1 "${readme}" | sed 's/^# *//' | sed 's/"/\\"/g')"
 
-  # Extract description from the first paragraph (line 3, after title and blank line)
-  description="$(sed -n '3p' "${readme}" | sed 's/"/\\"/g')"
+  # Extract description: first non-empty line after the # heading
+  description="$(awk 'NR>1 && /^.+$/ {print; exit}' "${readme}" | sed 's/"/\\"/g')"
 
   # Extract the first image filename referenced in the README (e.g., ./screenshot.png)
   thumbnail="$(grep -oE '\!\[.*\]\(\./[^)]+\.(png|gif)\)' "${readme}" | head -1 | sed 's/.*(\.\///; s/)//' || true)"
