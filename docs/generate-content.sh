@@ -40,6 +40,9 @@ for filter_dir in "${SCRIPTS_DIR}"/*/; do
   # Extract description from the first paragraph (line 3, after title and blank line)
   description="$(sed -n '3p' "${readme}" | sed 's/"/\\"/g')"
 
+  # Extract the first image filename referenced in the README (e.g., ./screenshot.png)
+  thumbnail="$(grep -oE '\!\[.*\]\(\./[^)]+\.(png|gif)\)' "${readme}" | head -1 | sed 's/.*(\.\///; s/)//' || true)"
+
   # Read README content (skip the first line since Hugo will use front matter title)
   content="$(tail -n +2 "${readme}")"
 
@@ -51,10 +54,17 @@ for filter_dir in "${SCRIPTS_DIR}"/*/; do
   content="$(echo "${content}" | sed "s|../../LICENSE|${LICENSE_URL}|g")"
 
   # Write index.md with front matter
+  # Build thumbnail front matter line
+  thumbnail_line=""
+  if [ -n "${thumbnail}" ]; then
+    thumbnail_line="thumbnail: \"${thumbnail}\""
+  fi
+
   cat > "${bundle_dir}/index.md" <<EOF
 ---
 title: "${title}"
 description: "${description}"
+${thumbnail_line}
 ---
 ${content}
 EOF

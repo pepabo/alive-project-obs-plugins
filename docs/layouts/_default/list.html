@@ -9,11 +9,14 @@
       {{ $filters := where .Site.RegularPages "Section" "filters" }}
       {{ range $filters }}
       <a href="{{ .RelPermalink }}" class="card">
-        {{ $images := .Resources.Match "*.{png,gif}" }}
-        {{ if $images }}
+        {{ $page := . }}
+        {{ with .Params.thumbnail }}
+        {{ $img := $page.Resources.GetMatch . }}
+        {{ if $img }}
         <div class="card-image">
-          <img src="{{ (index $images 0).RelPermalink }}" alt="{{ .Title }}" loading="lazy">
+          <img src="{{ $img.RelPermalink }}" alt="{{ $page.Title }}" loading="lazy">
         </div>
+        {{ end }}
         {{ end }}
         <div class="card-body">
           <h2 class="card-title">{{ .Title }}</h2>
