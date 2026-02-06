@@ -1,6 +1,6 @@
 # GitHub Pages サイト
 
-このリポジトリのscriptsフォルダに追加されたReadMe.mdファイルは以下のURLで公開されます
+このリポジトリのscriptsフォルダに追加されたReadMe.mdファイルはmainにマージされた直後に以下のURLで公開されます
 
 https://pepabo.github.io/alive-project-obs-plugins/
 
