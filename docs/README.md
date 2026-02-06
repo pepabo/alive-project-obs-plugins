@@ -12,6 +12,19 @@
 
 ## ローカルでの確認方法
 
+### Hugoのインストール
+
+Macの場合
+
+```
+brew install hugo
+```
+
+詳しくはこちら
+https://formulae.brew.sh/formula/hugo
+
+### Hugoの実行
+
 ```bash
 # コンテンツ生成
 bash docs/generate-content.sh
