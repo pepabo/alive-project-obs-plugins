@@ -1,14 +1,42 @@
 {{ define "main" }}
 <div class="list-page">
-  <section class="site-description">
-    <p><a href="https://alive-project.com/" target="_blank" rel="noopener">Alive Project byGMOペパボ</a>が提供する、OBSをもっと便利に使える配信支援ツール集です。</p>
+  <section class="hero-section">
+    <h1 class="hero-title">Alive lab</h1>
+    <p class="hero-description">OBS用のフィルター等を配っています。</p>
   </section>
+
+  <section class="search-section">
+    <div class="search-box">
+      <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="search-input" class="search-input" placeholder="SEARCH">
+    </div>
+  </section>
+
+  {{/* タグ一覧を収集 */}}
+  {{ $filters := where .Site.RegularPages "Section" "filters" }}
+  {{ $allTags := slice }}
+  {{ range $filters }}
+    {{ with .Params.tags }}
+      {{ range . }}
+        {{ $allTags = $allTags | append . }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+  {{ $uniqueTags := $allTags | uniq }}
+
+  {{ if gt (len $uniqueTags) 0 }}
+  <section class="category-filter">
+    <button class="category-tab active" data-category="all">すべて</button>
+    {{ range $uniqueTags }}
+    <button class="category-tab" data-category="{{ . }}">{{ . }}</button>
+    {{ end }}
+  </section>
+  {{ end }}
 
   <section class="filter-list">
     <div class="card-grid">
-      {{ $filters := where .Site.RegularPages "Section" "filters" }}
       {{ range $filters }}
-      <a href="{{ .RelPermalink }}" class="card">
+      <a href="{{ .RelPermalink }}" class="card" data-tags="{{ delimit (.Params.tags | default slice) "," }}" data-title="{{ .Title }}" data-description="{{ .Description }}">
         {{ $page := . }}
         {{ with .Params.thumbnail }}
         {{ $img := $page.Resources.GetMatch . }}
@@ -16,10 +44,25 @@
         <div class="card-image">
           <img src="{{ $img.RelPermalink }}" alt="{{ $page.Title }}" loading="lazy">
         </div>
+        {{ else }}
+        <div class="card-image">
+          <span class="card-image-placeholder">画像・動画エリア</span>
+        </div>
         {{ end }}
+        {{ else }}
+        <div class="card-image">
+          <span class="card-image-placeholder">画像・動画エリア</span>
+        </div>
         {{ end }}
         <div class="card-body">
           <h2 class="card-title">{{ .Title }}</h2>
+          {{ with .Params.tags }}
+          <div class="card-tags">
+            {{ range . }}
+            <span class="card-tag">{{ . }}</span>
+            {{ end }}
+          </div>
+          {{ end }}
           {{ with .Description }}<p class="card-description">{{ . }}</p>{{ end }}
         </div>
       </a>
@@ -27,4 +70,34 @@
     </div>
   </section>
 </div>
+
+<script>
+// 検索機能
+document.getElementById('search-input').addEventListener('input', function() {
+  var query = this.value.toLowerCase();
+  document.querySelectorAll('.card').forEach(function(card) {
+    var title = (card.getAttribute('data-title') || '').toLowerCase();
+    var desc = (card.getAttribute('data-description') || '').toLowerCase();
+    var tags = (card.getAttribute('data-tags') || '').toLowerCase();
+    card.style.display = (title.includes(query) || desc.includes(query) || tags.includes(query)) ? '' : 'none';
+  });
+});
+
+// カテゴリフィルター
+document.querySelectorAll('.category-tab').forEach(function(tab) {
+  tab.addEventListener('click', function() {
+    document.querySelectorAll('.category-tab').forEach(function(t) { t.classList.remove('active'); });
+    this.classList.add('active');
+    var category = this.getAttribute('data-category');
+    document.querySelectorAll('.card').forEach(function(card) {
+      if (category === 'all') {
+        card.style.display = '';
+      } else {
+        var tags = (card.getAttribute('data-tags') || '').split(',');
+        card.style.display = tags.includes(category) ? '' : 'none';
+      }
+    });
+  });
+});
+</script>
 {{ end }}
