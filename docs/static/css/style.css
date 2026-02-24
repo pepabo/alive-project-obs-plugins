@@ -25,14 +25,27 @@ html { scroll-behavior: smooth; }
 img { max-width: 100%; height: auto; display: block; }
 
 body {
+  position: relative;
   background: #fff;
-  background-image: url('../assets/dot-pattern.png');
-  background-repeat: repeat;
-  background-size: 400px auto;
   color: var(--gray-900);
   font-family: var(--font-ja);
   font-size: 14px;
   line-height: 1.7;
+}
+body::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url('../assets/dot-pattern-tile.png');
+  background-repeat: repeat;
+  background-size: 16px 16px;
+  opacity: 0.2;
+  z-index: 0;
+  pointer-events: none;
+}
+body > * {
+  position: relative;
+  z-index: 1;
 }
 
 /* ============================================================
