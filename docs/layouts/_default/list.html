@@ -1,115 +1,89 @@
 {{ define "main" }}
 
 <!-- ===== HERO ===== -->
+<div class="page-hero-bg"></div>
 <header class="page-hero">
-  <div class="hero-hatch">////////////</div>
-  <div class="hero-plus">
-    <span>+</span><span>+</span>
-    <span>+</span><span>+</span>
-    <span>+</span><span>+</span>
-    <span>+</span><span>+</span>
-    <span>+</span><span>+</span>
-  </div>
-  <div class="hero-vline"></div>
-  <div class="hero-watermark">Alive</div>
-  <div class="hero-bottom-line"><span class="hero-bottom-tag"> / ASSET_LIB v2.4</span></div>
-
-  <div class="hero-inner">
-    <div class="hero-status">
-      <div class="hero-status-badge">
-        <div class="hero-status-dot"></div>
-        ONLINE
-      </div>
-    </div>
-    <h1 class="hero-title">Alive <span class="lab">lab.</span></h1>
-    <p class="hero-desc">OBS用のフィルター等を配っています</p>
+  <div class="page-hero-inner">
+    <h1 class="hero-title"><img src="{{ "assets/sutorabo-logo.png" | relURL }}" alt="ストラボ" class="hero-title-img"></h1>
+    <p class="hero-desc">
+      配信画面をもっとおしゃれに、もっと個性的にしたい方へ！<br>
+      OBSのソースに適用するだけで使えるシェーダーフィルター素材をまとめました。
+    </p>
   </div>
 </header>
+
+<!-- ===== SEARCH + TABS ===== -->
+{{/* タグ一覧を収集 */}}
+{{ $filters := where .Site.RegularPages "Section" "filters" }}
+{{ $allTags := slice }}
+{{ range $filters }}
+  {{ with .Params.tags }}
+    {{ range . }}
+      {{ $allTags = $allTags | append . }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ $uniqueTags := $allTags | uniq }}
+
+<section class="search-tabs-section">
+  <div class="header__search">
+    <svg class="header__search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" id="search-input" class="header__search-input" placeholder="SEARCH">
+  </div>
+  {{ if gt (len $uniqueTags) 0 }}
+  <div class="tabs">
+    <div class="tab on" data-category="all">すべて</div>
+    {{ range $uniqueTags }}
+    <div class="tab" data-category="{{ . }}">{{ . }}</div>
+    {{ end }}
+  </div>
+  {{ end }}
+</section>
 
 <!-- ===== MAIN ===== -->
 <div class="page-main">
 
-  {{/* タグ一覧を収集 */}}
-  {{ $filters := where .Site.RegularPages "Section" "filters" }}
-  {{ $allTags := slice }}
-  {{ range $filters }}
-    {{ with .Params.tags }}
-      {{ range . }}
-        {{ $allTags = $allTags | append . }}
-      {{ end }}
-    {{ end }}
-  {{ end }}
-  {{ $uniqueTags := $allTags | uniq }}
-
-  <!-- Filter header -->
-  <div class="filter-header">
-    <div class="filter-header-label">Filters</div>
-    <div class="filter-header-count">{{ len $filters }} Assets</div>
-  </div>
-
-  <!-- Filter bar -->
-  <div class="filter-bar">
-    <div class="search-wrap">
-      <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="text" id="search-input" placeholder="SEARCH">
-    </div>
-    {{ if gt (len $uniqueTags) 0 }}
-    <div class="tabs">
-      <div class="tab on" data-category="all">すべて</div>
-      {{ range $uniqueTags }}
-      <div class="tab" data-category="{{ . }}">{{ . }}</div>
-      {{ end }}
-    </div>
-    {{ end }}
-  </div>
-
   <!-- Card grid -->
   <div class="card-grid">
-    {{ $idx := 0 }}
     {{ range $filters }}
-    <a href="{{ .RelPermalink }}" class="hud-card" data-tags="{{ delimit (.Params.tags | default slice) "," }}" data-title="{{ .Title }}" data-description="{{ .Description }}">
-      <div class="hud-thumb">
-        <div class="hud-thumb-bg"></div>
-        <div class="hud-bracket tl"></div><div class="hud-bracket tr"></div>
-        <div class="hud-bracket bl"></div><div class="hud-bracket br"></div>
+    <a href="{{ .RelPermalink }}" class="card" data-tags="{{ delimit (.Params.tags | default slice) "," }}" data-title="{{ .Title }}" data-description="{{ .Description }}">
+      <div class="card-thumb">
         {{ $page := . }}
         {{ with .Params.thumbnail }}
         {{ $img := $page.Resources.GetMatch . }}
         {{ if $img }}
         <img src="{{ $img.RelPermalink }}" alt="{{ $page.Title }}" loading="lazy">
         {{ else }}
-        <div class="hud-thumb-ph">画像・動画エリア</div>
+        <span class="card-thumb-ph">画像、動画エリア</span>
         {{ end }}
         {{ else }}
-        <div class="hud-thumb-ph">画像・動画エリア</div>
+        <span class="card-thumb-ph">画像、動画エリア</span>
         {{ end }}
-        <div class="hud-progress"><div class="hud-progress-track"><div class="hud-progress-fill" style="width:72%"></div></div></div>
-        <div class="hud-status-bar">
-          <div class="hud-status-left"><div class="hud-status-dot dot-ok"></div></div>
-          <span class="hud-status-right">ALB-{{ printf "%04d" $idx }}</span>
-        </div>
       </div>
-      <div class="hud-body">
-        <div class="hud-cat"><span class="hud-cat-bracket">[</span><span class="hud-cat-text">OBS Filter</span><span class="hud-cat-bracket">]</span></div>
-        <div class="hud-title">{{ .Title }}</div>
+      <div class="card-body">
+        <div class="card-title">{{ .Title }}</div>
         {{ with .Params.tags }}
-        <div class="hud-tags">
+        <div class="card-tags">
           {{ range . }}
-          <span class="hud-tag hud-tag-cyan">{{ . }}</span>
+          <span class="card-tag">{{ . }}</span>
           {{ end }}
         </div>
         {{ end }}
-        {{ with .Description }}<div class="hud-desc">{{ . }}</div>{{ end }}
-        <div class="hud-meta">
-          <span class="hud-meta-id">ALB-{{ printf "%04d" $idx }}</span>
-          {{ with $page.Params.download_url }}
-          <span class="hud-dl-btn" onclick="event.preventDefault(); event.stopPropagation();">▼ DL</span>
-          {{ end }}
-        </div>
+        {{ with .Description }}<div class="card-desc">{{ . }}</div>{{ end }}
       </div>
     </a>
-    {{ $idx = add $idx 1 }}
     {{ end }}
+  </div>
+
+  <!-- SHARE -->
+  <div class="share-section">
+    <div class="share-label">SHARE</div>
+    <div class="share-row">
+      <a href="#" class="share-btn share-x">𝕏 ポスト</a>
+      <a href="#" class="share-btn share-fb">f シェア</a>
+      <a href="#" class="share-btn share-hb">B! はてブ</a>
+      <a href="#" class="share-btn share-line">LINE で送る</a>
+    </div>
   </div>
 
 </div>
@@ -118,7 +92,7 @@
 // 検索機能
 document.getElementById('search-input').addEventListener('input', function() {
   var query = this.value.toLowerCase();
-  document.querySelectorAll('.hud-card').forEach(function(card) {
+  document.querySelectorAll('.card').forEach(function(card) {
     var title = (card.getAttribute('data-title') || '').toLowerCase();
     var desc = (card.getAttribute('data-description') || '').toLowerCase();
     var tags = (card.getAttribute('data-tags') || '').toLowerCase();
@@ -132,7 +106,7 @@ document.querySelectorAll('.tab').forEach(function(tab) {
     document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('on'); });
     this.classList.add('on');
     var category = this.getAttribute('data-category');
-    document.querySelectorAll('.hud-card').forEach(function(card) {
+    document.querySelectorAll('.card').forEach(function(card) {
       if (category === 'all') {
         card.style.display = '';
       } else {

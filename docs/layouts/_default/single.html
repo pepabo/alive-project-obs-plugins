@@ -1,5 +1,8 @@
 {{ define "main" }}
 <article class="single-page">
+  <nav class="breadcrumb breadcrumb-top">
+    <a href="{{ "" | relURL }}">一覧に戻る</a>
+  </nav>
   <div class="single-hero">
     <div class="single-title-bar">
       <h1 class="single-title">{{ .Title }}</h1>
@@ -29,13 +32,34 @@
 
   {{ with .Params.download_url }}
   <div class="single-download">
-    <a href="{{ . }}" class="download-btn" download>▼ DOWNLOAD</a>
+    <a href="{{ . }}" class="download-btn" download>ダウンロード</a>
   </div>
   {{ end }}
 
   <div class="content" id="install">
     {{ .Content }}
   </div>
+
+  <script>
+  (function() {
+    var content = document.getElementById('install');
+    if (!content) return;
+    var firstH2 = content.querySelector('h2:first-of-type');
+    if (!firstH2) return;
+    var nodes = [];
+    var el = firstH2;
+    while (el) {
+      if (el.tagName === 'H2' && nodes.length > 0) break;
+      nodes.push(el);
+      el = el.nextElementSibling;
+    }
+    if (nodes.length === 0) return;
+    var wrap = document.createElement('div');
+    wrap.className = 'preparation-block';
+    nodes[0].parentNode.insertBefore(wrap, nodes[0]);
+    nodes.forEach(function(n) { wrap.appendChild(n); });
+  })();
+  </script>
 
   <nav class="breadcrumb breadcrumb-bottom">
     <a href="{{ "" | relURL }}">&larr; 一覧に戻る</a>
