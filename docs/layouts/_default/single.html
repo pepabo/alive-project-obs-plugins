@@ -36,14 +36,15 @@
   </div>
   {{ end }}
 
-  <div class="content" id="install">
+  <div class="content" id="install" data-section="{{ .Section }}">
     {{ .Content }}
   </div>
 
+  {{ if eq .Section "filters" }}
   <script>
   (function() {
     var content = document.getElementById('install');
-    if (!content) return;
+    if (!content || content.getAttribute('data-section') !== 'filters') return;
     var firstH2 = content.querySelector('h2:first-of-type');
     if (!firstH2) return;
     var nodes = [];
@@ -60,6 +61,7 @@
     nodes.forEach(function(n) { wrap.appendChild(n); });
   })();
   </script>
+  {{ end }}
 
   <nav class="breadcrumb breadcrumb-bottom">
     <a href="{{ "" | relURL }}">&larr; 一覧に戻る</a>

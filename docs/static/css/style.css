@@ -568,6 +568,7 @@ body > * {
    ============================================================ */
 @media (max-width: 1024px) {
   .nav-logo-img { width: 198px; }
+  .hero-title-img { width: 50%; height: auto; max-width: none; }
 }
 @media (max-width: 767px) {
   .global-nav { padding: 0 16px; }
@@ -575,6 +576,7 @@ body > * {
   .header__search-input { width: 160px; }
   .page-hero { padding: 40px 16px 32px; min-height: 200px; }
   .hero-title { font-size: 40px; }
+  .hero-title-img { width: 80%; height: auto; max-width: none; }
   .search-tabs-section { padding: 24px 16px 0; }
   .page-main { padding: 24px 16px 48px; }
   .card-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
