@@ -89,6 +89,11 @@
 </div>
 
 <script>
+// カード表示アニメーション（左上から順に下→上・フェードイン）
+document.querySelectorAll('.card-grid .card').forEach(function(card, index) {
+  card.style.animationDelay = (index * 0.06) + 's';
+});
+
 // 検索機能
 document.getElementById('search-input').addEventListener('input', function() {
   var query = this.value.toLowerCase();

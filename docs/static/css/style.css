@@ -173,6 +173,22 @@ body {
   gap: 24px;
 }
 
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card-grid .card {
+  opacity: 0;
+  animation: cardFadeIn 0.5s ease forwards;
+}
+
 /* ============================================================
    CARD — Clean Magazine Style (左下カット)
    ============================================================ */
