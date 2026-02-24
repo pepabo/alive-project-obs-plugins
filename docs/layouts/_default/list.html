@@ -1,17 +1,33 @@
 {{ define "main" }}
-<div class="list-page">
-  <section class="hero-section">
-    <div class="hero-eyebrow">Alive Lab</div>
-    <h1 class="hero-title">Alive lab</h1>
-    <p class="hero-description">OBS用のフィルター等を配っています。</p>
-  </section>
 
-  <section class="search-section">
-    <div class="search-box">
-      <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="text" id="search-input" class="search-input" placeholder="SEARCH">
+<!-- ===== HERO ===== -->
+<header class="page-hero">
+  <div class="hero-hatch">////////////</div>
+  <div class="hero-plus">
+    <span>+</span><span>+</span>
+    <span>+</span><span>+</span>
+    <span>+</span><span>+</span>
+    <span>+</span><span>+</span>
+    <span>+</span><span>+</span>
+  </div>
+  <div class="hero-vline"></div>
+  <div class="hero-watermark">Alive</div>
+  <div class="hero-bottom-line"><span class="hero-bottom-tag"> / ASSET_LIB v2.4</span></div>
+
+  <div class="hero-inner">
+    <div class="hero-status">
+      <div class="hero-status-badge">
+        <div class="hero-status-dot"></div>
+        ONLINE
+      </div>
     </div>
-  </section>
+    <h1 class="hero-title">Alive <span class="lab">lab.</span></h1>
+    <p class="hero-desc">OBS用のフィルター等を配っています</p>
+  </div>
+</header>
+
+<!-- ===== MAIN ===== -->
+<div class="page-main">
 
   {{/* タグ一覧を収集 */}}
   {{ $filters := where .Site.RegularPages "Section" "filters" }}
@@ -25,58 +41,84 @@
   {{ end }}
   {{ $uniqueTags := $allTags | uniq }}
 
-  {{ if gt (len $uniqueTags) 0 }}
-  <section class="category-filter">
-    <button class="category-tab active" data-category="all">すべて</button>
-    {{ range $uniqueTags }}
-    <button class="category-tab" data-category="{{ . }}">{{ . }}</button>
-    {{ end }}
-  </section>
-  {{ end }}
+  <!-- Filter header -->
+  <div class="filter-header">
+    <div class="filter-header-label">Filters</div>
+    <div class="filter-header-count">{{ len $filters }} Assets</div>
+  </div>
 
-  <section class="filter-list">
-    <div class="card-grid">
-      {{ range $filters }}
-      <a href="{{ .RelPermalink }}" class="card" data-tags="{{ delimit (.Params.tags | default slice) "," }}" data-title="{{ .Title }}" data-description="{{ .Description }}">
+  <!-- Filter bar -->
+  <div class="filter-bar">
+    <div class="search-wrap">
+      <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="search-input" placeholder="SEARCH">
+    </div>
+    {{ if gt (len $uniqueTags) 0 }}
+    <div class="tabs">
+      <div class="tab on" data-category="all">すべて</div>
+      {{ range $uniqueTags }}
+      <div class="tab" data-category="{{ . }}">{{ . }}</div>
+      {{ end }}
+    </div>
+    {{ end }}
+  </div>
+
+  <!-- Card grid -->
+  <div class="card-grid">
+    {{ $idx := 0 }}
+    {{ range $filters }}
+    <a href="{{ .RelPermalink }}" class="hud-card" data-tags="{{ delimit (.Params.tags | default slice) "," }}" data-title="{{ .Title }}" data-description="{{ .Description }}">
+      <div class="hud-thumb">
+        <div class="hud-thumb-bg"></div>
+        <div class="hud-bracket tl"></div><div class="hud-bracket tr"></div>
+        <div class="hud-bracket bl"></div><div class="hud-bracket br"></div>
         {{ $page := . }}
         {{ with .Params.thumbnail }}
         {{ $img := $page.Resources.GetMatch . }}
         {{ if $img }}
-        <div class="card-image">
-          <img src="{{ $img.RelPermalink }}" alt="{{ $page.Title }}" loading="lazy">
-        </div>
+        <img src="{{ $img.RelPermalink }}" alt="{{ $page.Title }}" loading="lazy">
         {{ else }}
-        <div class="card-image">
-          <span class="card-image-placeholder">画像・動画エリア</span>
-        </div>
+        <div class="hud-thumb-ph">画像・動画エリア</div>
         {{ end }}
         {{ else }}
-        <div class="card-image">
-          <span class="card-image-placeholder">画像・動画エリア</span>
-        </div>
+        <div class="hud-thumb-ph">画像・動画エリア</div>
         {{ end }}
-        <div class="card-body">
-          <h2 class="card-title">{{ .Title }}</h2>
-          {{ with .Params.tags }}
-          <div class="card-tags">
-            {{ range . }}
-            <span class="card-tag">{{ . }}</span>
-            {{ end }}
-          </div>
+        <div class="hud-progress"><div class="hud-progress-track"><div class="hud-progress-fill" style="width:72%"></div></div></div>
+        <div class="hud-status-bar">
+          <div class="hud-status-left"><div class="hud-status-dot dot-ok"></div></div>
+          <span class="hud-status-right">ALB-{{ printf "%04d" $idx }}</span>
+        </div>
+      </div>
+      <div class="hud-body">
+        <div class="hud-cat"><span class="hud-cat-bracket">[</span><span class="hud-cat-text">OBS Filter</span><span class="hud-cat-bracket">]</span></div>
+        <div class="hud-title">{{ .Title }}</div>
+        {{ with .Params.tags }}
+        <div class="hud-tags">
+          {{ range . }}
+          <span class="hud-tag hud-tag-cyan">{{ . }}</span>
           {{ end }}
-          {{ with .Description }}<p class="card-description">{{ . }}</p>{{ end }}
         </div>
-      </a>
-      {{ end }}
-    </div>
-  </section>
+        {{ end }}
+        {{ with .Description }}<div class="hud-desc">{{ . }}</div>{{ end }}
+        <div class="hud-meta">
+          <span class="hud-meta-id">ALB-{{ printf "%04d" $idx }}</span>
+          {{ with $page.Params.download_url }}
+          <span class="hud-dl-btn" onclick="event.preventDefault(); event.stopPropagation();">▼ DL</span>
+          {{ end }}
+        </div>
+      </div>
+    </a>
+    {{ $idx = add $idx 1 }}
+    {{ end }}
+  </div>
+
 </div>
 
 <script>
 // 検索機能
 document.getElementById('search-input').addEventListener('input', function() {
   var query = this.value.toLowerCase();
-  document.querySelectorAll('.card').forEach(function(card) {
+  document.querySelectorAll('.hud-card').forEach(function(card) {
     var title = (card.getAttribute('data-title') || '').toLowerCase();
     var desc = (card.getAttribute('data-description') || '').toLowerCase();
     var tags = (card.getAttribute('data-tags') || '').toLowerCase();
@@ -85,12 +127,12 @@ document.getElementById('search-input').addEventListener('input', function() {
 });
 
 // カテゴリフィルター
-document.querySelectorAll('.category-tab').forEach(function(tab) {
+document.querySelectorAll('.tab').forEach(function(tab) {
   tab.addEventListener('click', function() {
-    document.querySelectorAll('.category-tab').forEach(function(t) { t.classList.remove('active'); });
-    this.classList.add('active');
+    document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('on'); });
+    this.classList.add('on');
     var category = this.getAttribute('data-category');
-    document.querySelectorAll('.card').forEach(function(card) {
+    document.querySelectorAll('.hud-card').forEach(function(card) {
       if (category === 'all') {
         card.style.display = '';
       } else {

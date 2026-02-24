@@ -6,44 +6,75 @@
   <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Noto+Sans+JP:wght@300;400;500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
 </head>
 <body>
-  <header class="site-header">
-    <div class="header-inner">
-      <a href="{{ "" | relURL }}" class="site-logo">
-        <img src="{{ "assets/alive-studio-logo.png" | relURL }}" alt="Alive Studio" class="logo-img">
-      </a>
-      <div class="header-search">
-        <svg class="header-search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input type="text" class="header-search-input" placeholder="SEARCH">
-      </div>
+
+<nav class="global-nav">
+  <a href="{{ "" | relURL }}" class="nav-logo">
+    <span class="nav-logo-main">Alive Lab</span>
+    <span class="nav-logo-sub">by GMO Pepabo</span>
+  </a>
+  <div class="nav-right">
+    <div class="nav-search-wrap">
+      <svg class="nav-search-icon" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input class="nav-search" type="text" placeholder="SEARCH">
     </div>
-  </header>
+  </div>
+</nav>
 
-  <main class="site-main">
-    {{ block "main" . }}{{ end }}
-  </main>
+<main>
+  {{ block "main" . }}{{ end }}
+</main>
 
-  <footer class="site-footer">
-    <p>&copy; 2025 GMO Pepabo, Inc. All rights reserved.</p>
-  </footer>
-  <script>
-  document.addEventListener("click", function(e) {
-    var a = e.target.closest('a[href$=".lua"]');
-    if (!a) return;
-    e.preventDefault();
-    var url = a.href;
-    var filename = url.split("/").pop();
-    fetch(url).then(function(r) { return r.blob(); }).then(function(blob) {
-      var link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = filename;
-      link.click();
-      URL.revokeObjectURL(link.href);
-    });
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-logo-block">
+      <a href="{{ "" | relURL }}" class="footer-logo">
+        <span class="footer-logo-main">Alive Lab</span>
+        <span class="footer-logo-sub">by GMO Pepabo</span>
+      </a>
+    </div>
+    <nav class="footer-nav">
+      <div class="footer-nav-col">
+        <div class="footer-nav-title">About</div>
+        <a href="{{ "" | relURL }}" class="footer-nav-link">Alive Labについて</a>
+      </div>
+      <div class="footer-nav-col">
+        <div class="footer-nav-title">Guides</div>
+        <a href="{{ "guides/install/" | relURL }}" class="footer-nav-link">インストール方法</a>
+        <a href="{{ "guides/filter-apply/" | relURL }}" class="footer-nav-link">フィルター適用方法</a>
+      </div>
+      <div class="footer-nav-col">
+        <div class="footer-nav-title">Company</div>
+        <a href="https://pepabo.com/" class="footer-nav-link" target="_blank" rel="noopener">GMO Pepabo</a>
+      </div>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copyright">&copy; 2025 GMO Pepabo, Inc.</span>
+    <div class="footer-links">
+      <a href="https://pepabo.com/policy/" class="footer-link" target="_blank" rel="noopener">Privacy Policy</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.addEventListener("click", function(e) {
+  var a = e.target.closest('a[href$=".lua"]');
+  if (!a) return;
+  e.preventDefault();
+  var url = a.href;
+  var filename = url.split("/").pop();
+  fetch(url).then(function(r) { return r.blob(); }).then(function(blob) {
+    var link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    link.click();
+    URL.revokeObjectURL(link.href);
   });
-  </script>
+});
+</script>
 </body>
 </html>
