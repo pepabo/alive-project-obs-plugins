@@ -14,11 +14,11 @@
 <nav class="global-nav">
   {{ if .IsHome }}
   <a href="https://alive-project.com/streamer-magazine/" class="nav-logo">
-    <img src="{{ "assets/header-logo.png" | relURL }}" alt="ストリーマーマガジン by GMO ペパボ" class="nav-logo-img">
+    <img src="{{ "assets/streamer-magazine_logo.png" | relURL }}" alt="ストリーマーマガジン by GMO ペパボ" class="nav-logo-img">
   </a>
   {{ else }}
   <a href="{{ "" | relURL }}" class="nav-logo">
-    <img src="{{ "assets/header-logo.png" | relURL }}" alt="ストリーマーマガジン by GMO ペパボ" class="nav-logo-img">
+    <img src="{{ "assets/streamer-magazine_logo.png" | relURL }}" alt="ストリーマーマガジン by GMO ペパボ" class="nav-logo-img">
   </a>
   {{ end }}
   <div class="nav-right">
@@ -33,47 +33,49 @@
   {{ block "main" . }}{{ end }}
 </main>
 
-<footer class="site-footer">
+<footer class="footer">
   <div class="footer__container">
     <div class="footer__body">
       <div class="footer__logo">
         <a href="{{ "" | relURL }}" class="footer-logo">
-          <span class="footer-logo-main">ストリーマーマガジン</span>
-          <span class="footer-logo-sub">by GMO Pepabo</span>
+          <img src="{{ "assets/streamer-magazine_logo.png" | relURL }}" alt="ストリーマーマガジン by GMO Pepabo" class="footer-logo-img">
         </a>
         <p class="footer__copyright"><small>&copy; 2024 Streamer Magazine</small></p>
       </div>
-      <div class="footer__sns">
-        <span class="footer__sns-text">FOLLOW US</span>
-        <ul class="footer__sns-list">
-          <li class="footer__sns-item">
-            <a href="#" class="footer__sns-link">𝕏</a>
+      <div class="footer__sitemap">
+        <ul class="footer-nav">
+          <li class="footer__sitemap__list1">
+            <ul class="footer-nav-child">
+              <li><a href="{{ "" | relURL }}">ABOUT</a></li>
+              <ul class="footer-nav-grandchild footer-nav-grandchild--single">
+                <li><a href="{{ "" | relURL }}">About</a></li>
+              </ul>
+            </ul>
+          </li>
+          <li class="footer__sitemap__list2">
+            <ul class="footer-nav-child">
+              <li><a href="#">All</a></li>
+              <ul class="footer-nav-grandchild">
+                <li><a href="#">News</a></li>
+                <li><a href="#">How to</a></li>
+                <li><a href="#">Column</a></li>
+              </ul>
+            </ul>
+          </li>
+          <li class="footer__sitemap__list3">
+            <ul class="footer-nav-child">
+              <li class="icon__new-tab"><a target="_blank" rel="noopener" href="https://pepabo.com/">Company</a></li>
+              <li class="icon__new-tab"><a target="_blank" rel="noopener" href="https://pepabo.com/company/privacy/">Privacy policy</a></li>
+            </ul>
           </li>
         </ul>
       </div>
-      <nav class="footer__sitemap">
-        <div class="footer-nav-col">
-          <div class="footer-nav-title">About</div>
-          <a href="{{ "" | relURL }}" class="footer-nav-link">ストマガについて</a>
-          <a href="#" class="footer-nav-link">お問い合わせ</a>
-        </div>
-        <div class="footer-nav-col">
-          <div class="footer-nav-title">All</div>
-          <a href="#" class="footer-nav-link">- News</a>
-          <a href="#" class="footer-nav-link">- How To</a>
-          <a href="#" class="footer-nav-link">- Column</a>
-        </div>
-        <div class="footer-nav-col">
-          <div class="footer-nav-title">Company</div>
-          <a href="https://pepabo.com/" class="footer-nav-link ext" target="_blank" rel="noopener">COMPANY</a>
-          <a href="https://pepabo.com/policy/" class="footer-nav-link ext" target="_blank" rel="noopener">PRIVACY POLICY</a>
-          <a href="#" class="footer-nav-link ext">CONTACT</a>
-        </div>
-      </nav>
     </div>
   </div>
+  <div class="footer-layout" id="__pepabo-footer-container"></div>
 </footer>
 
+<script async type="text/javascript" src="https://asset.pepabo.com/pepabo-footer/pepabo-footer.js"></script>
 <script>
 document.addEventListener("click", function(e) {
   var a = e.target.closest('a[href$=".lua"]');
