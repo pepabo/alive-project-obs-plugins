@@ -1,12 +1,19 @@
 {{ define "main" }}
 <article class="single-page">
-  <nav class="breadcrumb breadcrumb-top">
-    <a href="{{ "" | relURL }}">一覧に戻る</a>
-  </nav>
   <div class="single-hero">
     <div class="single-title-bar">
       <h1 class="single-title">{{ .Title }}</h1>
+      {{ with .Description }}
+      <p class="single-description">{{ . }}</p>
+      {{ end }}
     </div>
+    {{ with .Params.tags }}
+    <div class="single-tags">
+      {{ range . }}
+      <span class="single-tag">{{ . }}</span>
+      {{ end }}
+    </div>
+    {{ end }}
     {{ $page := . }}
     {{ with .Params.thumbnail }}
     {{ $img := $page.Resources.GetMatch . }}
@@ -17,18 +24,6 @@
     {{ end }}
     {{ end }}
   </div>
-
-  {{ with .Params.tags }}
-  <div class="single-tags">
-    {{ range . }}
-    <span class="single-tag">{{ . }}</span>
-    {{ end }}
-  </div>
-  {{ end }}
-
-  {{ with .Description }}
-  <p class="single-description">{{ . }}</p>
-  {{ end }}
 
   {{ with .Params.download_url }}
   <div class="single-download">
@@ -63,8 +58,5 @@
   </script>
   {{ end }}
 
-  <nav class="breadcrumb breadcrumb-bottom">
-    <a href="{{ "" | relURL }}">&larr; 一覧に戻る</a>
-  </nav>
 </article>
 {{ end }}
