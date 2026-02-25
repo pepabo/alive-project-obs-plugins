@@ -6,14 +6,9 @@
       {{ with .Description }}
       <p class="single-description">{{ . }}</p>
       {{ end }}
-    </div>
-    {{ with .Params.tags }}
-    <div class="single-tags">
-      {{ range . }}
-      <span class="single-tag">{{ . }}</span>
+      {{ with .Params.tags }}
       {{ end }}
     </div>
-    {{ end }}
     {{ $page := . }}
     {{ with .Params.thumbnail }}
     {{ $img := $page.Resources.GetMatch . }}
