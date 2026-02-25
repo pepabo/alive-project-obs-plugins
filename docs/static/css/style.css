@@ -52,7 +52,7 @@ body > * {
    GLOBAL NAV
    ============================================================ */
 .global-nav {
-  position: sticky; top: 0; z-index: 100;
+  position: sticky; top: 29px; z-index: 100;
   background: rgba(255,255,255,0.97);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid #E5E5E5;
@@ -805,7 +805,7 @@ body > * {
   .hero-title-img { width: 50%; height: auto; max-width: none; }
 }
 @media (max-width: 767px) {
-  .global-nav { padding: 0 16px; }
+  .global-nav { padding: 0 16px; top: 0; }
   .nav-logo-img { width: 110px; }
   .header__search-input { width: 160px; }
   .page-hero { padding: 40px 16px 32px; min-height: 200px; }
