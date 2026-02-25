@@ -360,9 +360,6 @@ body > * {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #ffffff;
-  border-bottom: #EFEFEF solid 1px;
-  padding: 3rem 1rem;
   width: 100%;
   box-sizing: border-box;
   flex-direction: column;
@@ -406,10 +403,6 @@ body > * {
 .footer {
   font-family: var(--font-en);
   text-transform: uppercase;
-  padding: 77px 0 0;
-}
-@media screen and (min-width: 1024px) {
-  .footer { padding-top: 125px; }
 }
 .footer__container {
   max-width: 1128px;

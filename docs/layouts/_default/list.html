@@ -75,14 +75,18 @@
     {{ end }}
   </div>
 
-  <!-- SHARE -->
-  <div class="share-section">
-    <div class="share-label">SHARE</div>
-    <div class="share-row">
-      <a href="#" class="share-btn share-x">𝕏 ポスト</a>
-      <a href="#" class="share-btn share-fb">f シェア</a>
-      <a href="#" class="share-btn share-hb">B! はてブ</a>
-      <a href="#" class="share-btn share-line">LINE で送る</a>
+  <div class="footer__share">
+    <p class="page-footer__share-title">SHARE</p>
+    <div class="page-footer__share-list">
+      <button type="button" class="share-btn-x" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent(document.title),'_blank','noopener')">
+        <img src="{{ "assets/x-circle-b.svg" | relURL }}" alt="Xでシェア" width="44" height="44">
+      </button>
+      <button type="button" class="share-btn-fb" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','noopener')">
+        <img src="{{ "assets/facebook.svg" | relURL }}" alt="Facebookでシェア" width="44" height="44">
+      </button>
+      <button type="button" class="share-btn-link" onclick="navigator.clipboard.writeText(location.href).then(function(){alert('リンクをコピーしました')})">
+        <img src="{{ "assets/link-icon.svg" | relURL }}" alt="リンクをコピー" width="44" height="44">
+      </button>
     </div>
   </div>
 
