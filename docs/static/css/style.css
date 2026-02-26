@@ -831,7 +831,7 @@ body > * {
 .single-page {
   max-width: 720px;
   margin: 0 auto;
-  padding: 36px 32px 80px;
+  padding: 108px 32px;
 }
 
 .single-hero {
@@ -868,7 +868,7 @@ body > * {
 }
 
 .single-description {
-  font-size: 13px; color: var(--gray-500);
+  font-size: 13px; color: var(--gray-900);
   line-height: 1.7;
 }
 
