@@ -63,13 +63,6 @@
         </div>
         <div class="card-body">
           <div class="card-title">{{ .Title }}</div>
-          {{ with .Params.tags }}
-          <div class="card-tags">
-            {{ range . }}
-            <span class="card-tag">{{ . }}</span>
-            {{ end }}
-          </div>
-          {{ end }}
           {{ with .Description }}<div class="card-desc">{{ . }}</div>{{ end }}
         </div>
       </a>
