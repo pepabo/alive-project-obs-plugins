@@ -298,9 +298,21 @@ body > * {
   }
 }
 
-.card-grid .card {
+/* Card wrapper (drop-shadow lives here, outside clip-path) */
+.card-wrap {
   opacity: 0;
   animation: cardFadeIn 0.5s ease forwards;
+  filter: drop-shadow(0 0 0 transparent);
+  transition: transform 0.3s ease, filter 0.3s ease;
+  will-change: transform, filter;
+}
+.card-wrap:nth-child(odd):hover {
+  transform: translateY(-4px) scale(1.03);
+  filter: drop-shadow(0 8px 24px rgba(67, 184, 252, 0.3));
+}
+.card-wrap:nth-child(even):hover {
+  transform: translateY(-4px) scale(1.03);
+  filter: drop-shadow(0 8px 24px rgba(242, 75, 225, 0.3));
 }
 
 /* ============================================================
@@ -310,7 +322,6 @@ body > * {
   border: none;
   position: relative;
   cursor: pointer;
-  transition: transform 0.2s ease, filter 0.2s ease;
   text-decoration: none;
   color: inherit;
   display: block;
@@ -326,27 +337,11 @@ body > * {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 15px 100%, 0 calc(100% - 15px));
   pointer-events: none;
 }
-.card:nth-child(odd) {
+.card-wrap:nth-child(odd) .card {
   background: #43B8FC;
-  -webkit-filter: drop-shadow(0 4px 20px rgba(67, 184, 252, 1));
-  filter: drop-shadow(0 4px 20px rgba(67, 184, 252, 1));
 }
-.card:nth-child(even) {
+.card-wrap:nth-child(even) .card {
   background: #F24BE1;
-  -webkit-filter: drop-shadow(0 4px 20px rgba(242, 75, 225, 1));
-  filter: drop-shadow(0 4px 20px rgba(242, 75, 225, 1));
-}
-.card:hover,
-.card-grid .card:hover {
-  transform: translateY(-4px) !important;
-}
-.card:nth-child(odd):hover {
-  -webkit-filter: drop-shadow(0 8px 24px rgba(67, 184, 252, 1));
-  filter: drop-shadow(0 8px 24px rgba(67, 184, 252, 1));
-}
-.card:nth-child(even):hover {
-  -webkit-filter: drop-shadow(0 8px 24px rgba(242, 75, 225, 1));
-  filter: drop-shadow(0 8px 24px rgba(242, 75, 225, 1));
 }
 
 /* Thumb */
@@ -357,12 +352,12 @@ body > * {
   overflow: hidden;
   position: relative; z-index: 1;
 }
-.card:nth-child(odd) .card-thumb {
+.card-wrap:nth-child(odd) .card-thumb {
   border-top: 1px solid #43B8FC;
   border-left: 1px solid #43B8FC;
   border-right: 1px solid #43B8FC;
 }
-.card:nth-child(even) .card-thumb {
+.card-wrap:nth-child(even) .card-thumb {
   border-top: 1px solid #F24BE1;
   border-left: 1px solid #F24BE1;
   border-right: 1px solid #F24BE1;
@@ -386,7 +381,12 @@ body > * {
   line-height: 22px; color: var(--gray-900);
   margin-bottom: 8px;
   padding-left: 10px;
-  border-left: 3px solid var(--accent-purple);
+}
+.card-wrap:nth-child(odd) .card-title {
+  border-left: 3px solid #43B8FC;
+}
+.card-wrap:nth-child(even) .card-title {
+  border-left: 3px solid #F24BE1;
 }
 
 .card-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
@@ -402,6 +402,16 @@ body > * {
 .card-desc {
   font-family: var(--font-ja); font-size: 12px; line-height: 18px;
   color: var(--gray-900);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+@media (max-width: 1024px) {
+  .card-desc { -webkit-line-clamp: 2; }
+}
+@media (max-width: 767px) {
+  .card-desc { -webkit-line-clamp: 2; }
 }
 
 /* ============================================================

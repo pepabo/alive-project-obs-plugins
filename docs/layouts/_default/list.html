@@ -28,7 +28,7 @@
 <section class="search-tabs-section">
   <div class="header__search">
     <svg class="header__search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    <input type="text" id="search-input" class="header__search-input" placeholder="使ってみたいフィルターを検索">
+    <input type="text" id="search-input" class="header__search-input" placeholder="配信をもっと面白くするフィルターを探す">
   </div>
   {{ if gt (len $uniqueTags) 0 }}
   <div class="tabs">
@@ -46,32 +46,34 @@
   <!-- Card grid -->
   <div class="card-grid">
     {{ range $filters }}
-    <a href="{{ .RelPermalink }}" class="card" data-tags="{{ delimit (.Params.tags | default slice) "," }}" data-title="{{ .Title }}" data-description="{{ .Description }}">
-      <div class="card-thumb">
-        {{ $page := . }}
-        {{ with .Params.thumbnail }}
-        {{ $img := $page.Resources.GetMatch . }}
-        {{ if $img }}
-        <img src="{{ $img.RelPermalink }}" alt="{{ $page.Title }}" loading="lazy">
-        {{ else }}
-        <span class="card-thumb-ph">画像、動画エリア</span>
-        {{ end }}
-        {{ else }}
-        <span class="card-thumb-ph">画像、動画エリア</span>
-        {{ end }}
-      </div>
-      <div class="card-body">
-        <div class="card-title">{{ .Title }}</div>
-        {{ with .Params.tags }}
-        <div class="card-tags">
-          {{ range . }}
-          <span class="card-tag">{{ . }}</span>
+    <div class="card-wrap" data-tags="{{ delimit (.Params.tags | default slice) "," }}" data-title="{{ .Title }}" data-description="{{ .Description }}">
+      <a href="{{ .RelPermalink }}" class="card">
+        <div class="card-thumb">
+          {{ $page := . }}
+          {{ with .Params.thumbnail }}
+          {{ $img := $page.Resources.GetMatch . }}
+          {{ if $img }}
+          <img src="{{ $img.RelPermalink }}" alt="{{ $page.Title }}" loading="lazy">
+          {{ else }}
+          <span class="card-thumb-ph">画像、動画エリア</span>
+          {{ end }}
+          {{ else }}
+          <span class="card-thumb-ph">画像、動画エリア</span>
           {{ end }}
         </div>
-        {{ end }}
-        {{ with .Description }}<div class="card-desc">{{ . }}</div>{{ end }}
-      </div>
-    </a>
+        <div class="card-body">
+          <div class="card-title">{{ .Title }}</div>
+          {{ with .Params.tags }}
+          <div class="card-tags">
+            {{ range . }}
+            <span class="card-tag">{{ . }}</span>
+            {{ end }}
+          </div>
+          {{ end }}
+          {{ with .Description }}<div class="card-desc">{{ . }}</div>{{ end }}
+        </div>
+      </a>
+    </div>
     {{ end }}
   </div>
 
@@ -79,18 +81,18 @@
 
 <script>
 // カード表示アニメーション（左上から順に下→上・フェードイン）
-document.querySelectorAll('.card-grid .card').forEach(function(card, index) {
-  card.style.animationDelay = (index * 0.06) + 's';
+document.querySelectorAll('.card-grid .card-wrap').forEach(function(wrap, index) {
+  wrap.style.animationDelay = (index * 0.06) + 's';
 });
 
 // 検索機能
 document.getElementById('search-input').addEventListener('input', function() {
   var query = this.value.toLowerCase();
-  document.querySelectorAll('.card').forEach(function(card) {
-    var title = (card.getAttribute('data-title') || '').toLowerCase();
-    var desc = (card.getAttribute('data-description') || '').toLowerCase();
-    var tags = (card.getAttribute('data-tags') || '').toLowerCase();
-    card.style.display = (title.includes(query) || desc.includes(query) || tags.includes(query)) ? '' : 'none';
+  document.querySelectorAll('.card-wrap').forEach(function(wrap) {
+    var title = (wrap.getAttribute('data-title') || '').toLowerCase();
+    var desc = (wrap.getAttribute('data-description') || '').toLowerCase();
+    var tags = (wrap.getAttribute('data-tags') || '').toLowerCase();
+    wrap.style.display = (title.includes(query) || desc.includes(query) || tags.includes(query)) ? '' : 'none';
   });
 });
 
@@ -100,12 +102,12 @@ document.querySelectorAll('.tab').forEach(function(tab) {
     document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('on'); });
     this.classList.add('on');
     var category = this.getAttribute('data-category');
-    document.querySelectorAll('.card').forEach(function(card) {
+    document.querySelectorAll('.card-wrap').forEach(function(wrap) {
       if (category === 'all') {
-        card.style.display = '';
+        wrap.style.display = '';
       } else {
-        var tags = (card.getAttribute('data-tags') || '').split(',');
-        card.style.display = tags.includes(category) ? '' : 'none';
+        var tags = (wrap.getAttribute('data-tags') || '').split(',');
+        wrap.style.display = tags.includes(category) ? '' : 'none';
       }
     });
   });
