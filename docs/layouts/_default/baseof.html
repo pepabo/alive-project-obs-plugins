@@ -24,35 +24,41 @@
 </head>
 <body>
 
-<nav class="global-nav">
-  {{ if .IsHome }}
-  <a href="https://alive-project.com/streamer-magazine/" class="nav-logo">
-    <img src="{{ "assets/streamer-magazine_logo.png" | relURL }}" alt="ストリーマーマガジン by GMO ペパボ" class="nav-logo-img">
-  </a>
-  {{ else }}
-  <a href="{{ "" | relURL }}" class="nav-logo">
-    <img src="{{ "assets/streamer-magazine_logo.png" | relURL }}" alt="ストリーマーマガジン by GMO ペパボ" class="nav-logo-img">
-  </a>
-  {{ end }}
-  <ul class="header__SNS-list">
-    <li class="header__SNS-item">
-      <a href="https://x.com/streamer_mag" class="header__SNS-link" target="_blank" rel="noopener noreferrer">
-        <img src="{{ "assets/icon-x.svg" | relURL }}" alt="X" loading="lazy" width="25" height="25" class="header__SNS-icon__image header__SNS-icon__image--x">
-      </a>
-    </li>
-    <li class="header__SNS-item">
-      <a href="https://www.youtube.com/@streamer_magazine" class="header__SNS-link" target="_blank" rel="noopener noreferrer">
-        <img src="{{ "assets/icon-youtube.svg" | relURL }}" alt="YouTube" loading="lazy" width="28" height="20" class="header__SNS-icon__image header__SNS-icon__image--youtube">
-      </a>
-    </li>
-  </ul>
-  <div class="nav-right">
-    <div class="header__search">
-      <svg class="header__search-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input class="header__search-input" type="text" placeholder="SEARCH">
+<header class="header">
+  <div class="header__container">
+    <div class="header__logo">
+      <h1 class="header__title">
+        {{ if .IsHome }}
+        <a href="https://alive-project.com/streamer-magazine/">
+          <img src="{{ "assets/streamer-magazine_logo.png" | relURL }}" alt="ストリーマーマガジン by GMO ペパボ" loading="lazy" width="264" height="48">
+        </a>
+        {{ else }}
+        <a href="{{ "" | relURL }}">
+          <img src="{{ "assets/streamer-magazine_logo.png" | relURL }}" alt="ストリーマーマガジン by GMO ペパボ" loading="lazy" width="264" height="48">
+        </a>
+        {{ end }}
+      </h1>
+      <ul class="header__SNS-list">
+        <li class="header__SNS-item">
+          <a href="https://x.com/streamer_mag" class="header__SNS-link" target="_blank" rel="noopener noreferrer">
+            <img src="{{ "assets/icon-x.svg" | relURL }}" alt="X" loading="lazy" width="25" height="25" class="header__SNS-icon__image header__SNS-icon__image--x">
+          </a>
+        </li>
+        <li class="header__SNS-item">
+          <a href="https://www.youtube.com/@streamer_magazine" class="header__SNS-link" target="_blank" rel="noopener noreferrer">
+            <img src="{{ "assets/icon-youtube.svg" | relURL }}" alt="YouTube" loading="lazy" width="28" height="20" class="header__SNS-icon__image header__SNS-icon__image--youtube">
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="header__search__wrap">
+      <div class="header__search">
+        <svg class="header__search-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input class="header__search-input" type="text" placeholder="SEARCH">
+      </div>
     </div>
   </div>
-</nav>
+</header>
 
 <main>
   {{ block "main" . }}{{ end }}
