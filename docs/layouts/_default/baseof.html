@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="{{ "favicon.png" | relURL }}">
   <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
   <!-- OGP -->
   <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}">
@@ -49,34 +50,39 @@
   <div class="footer__container">
     <div class="footer__body">
       <div class="footer__logo">
-        <a href="{{ "" | relURL }}" class="footer-logo">
-          <img src="{{ "assets/streamer-magazine_logo.png" | relURL }}" alt="ストリーマーマガジン by GMO Pepabo" class="footer-logo-img">
-        </a>
-        <p class="footer__copyright"><small>&copy; 2024 Streamer Magazine</small></p>
+        <p>
+          <a href="https://alive-project.com/streamer-magazine/">
+            <img src="{{ "assets/streamer-magazine_logo.png" | relURL }}" alt="ストリーマーマガジン" loading="lazy" width="279" height="48">
+          </a>
+          <p class="footer__copyright"><small>&copy; 2024 Streamer Magazine</small></p>
+        </p>
       </div>
       <div class="footer__sitemap">
         <ul class="footer-nav">
           <li class="footer__sitemap__list1">
             <ul class="footer-nav-child">
-              <li><a href="{{ "" | relURL }}">ABOUT</a></li>
+              <li><a href="https://alive-project.com/streamer-magazine/about/">ABOUT</a></li>
               <ul class="footer-nav-grandchild footer-nav-grandchild--single">
-                <li><a href="{{ "" | relURL }}">About</a></li>
+                <li><a href="https://alive-project.com/streamer-magazine/about/">About</a></li>
               </ul>
             </ul>
-          </li>
           <li class="footer__sitemap__list2">
             <ul class="footer-nav-child">
-              <li><a href="#">All</a></li>
+              <li><a href="https://alive-project.com/streamer-magazine/archives/">All</a></li>
               <ul class="footer-nav-grandchild">
-                <li><a href="#">News</a></li>
-                <li><a href="#">How to</a></li>
-                <li><a href="#">Column</a></li>
+                <li><a href="https://alive-project.com/streamer-magazine/category/news/">News</a></li>
+                <li><a href="https://alive-project.com/streamer-magazine/category/howto/">How to</a></li>
+                <li><a href="https://alive-project.com/streamer-magazine/category/review/">Review</a></li>
+                <li><a href="https://alive-project.com/streamer-magazine/category/report/">Report</a></li>
+                <li><a href="https://alive-project.com/streamer-magazine/category/interview/">Interview</a></li>
+                <li><a href="https://alive-project.com/streamer-magazine/category/column/">Column</a></li>
               </ul>
             </ul>
           </li>
           <li class="footer__sitemap__list3">
             <ul class="footer-nav-child">
               <li class="icon__new-tab"><a target="_blank" rel="noopener" href="https://pepabo.com/">Company</a></li>
+              <li><a href="https://alive-project.com/streamer-magazine/terms-of-service/">terms of service</a></li>
               <li class="icon__new-tab"><a target="_blank" rel="noopener" href="https://pepabo.com/company/privacy/">Privacy policy</a></li>
             </ul>
           </li>
