@@ -6,7 +6,7 @@
   <div class="page-hero-inner">
     <h1 class="hero-title"><img src="{{ "assets/logo.svg" | relURL }}" alt="ストラボ" class="hero-title-img"></h1>
     <p class="hero-desc">
-      配信画面をもっとおしゃれに、もっと個性的にしたい方へ！<br>
+      配信画面をもっとおしゃれに、個性的にしたい方へ！<br>
       OBSのソースに適用するだけで使える素材をまとめました。
     </p>
   </div>
@@ -28,7 +28,7 @@
 <section class="search-tabs-section">
   <div class="header__search">
     <svg class="header__search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    <input type="text" id="search-input" class="header__search-input" placeholder="モザイク, ドットを検索">
+    <input type="text" id="search-input" class="header__search-input" placeholder="使ってみたいフィルターを検索">
   </div>
   {{ if gt (len $uniqueTags) 0 }}
   <div class="tabs">
@@ -73,21 +73,6 @@
       </div>
     </a>
     {{ end }}
-  </div>
-
-  <div class="footer__share">
-    <p class="page-footer__share-title">SHARE</p>
-    <div class="page-footer__share-list">
-      <button type="button" class="share-btn-x" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent(document.title),'_blank','noopener')">
-        <img src="{{ "assets/x-circle-b.svg" | relURL }}" alt="Xでシェア" width="44" height="44">
-      </button>
-      <button type="button" class="share-btn-fb" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','noopener')">
-        <img src="{{ "assets/facebook.svg" | relURL }}" alt="Facebookでシェア" width="44" height="44">
-      </button>
-      <button type="button" class="share-btn-link" onclick="navigator.clipboard.writeText(location.href).then(function(){alert('リンクをコピーしました')})">
-        <img src="{{ "assets/link-icon.svg" | relURL }}" alt="リンクをコピー" width="44" height="44">
-      </button>
-    </div>
   </div>
 
 </div>
