@@ -47,6 +47,20 @@
 </main>
 
 <footer class="footer">
+  <div class="footer__share">
+    <p class="page-footer__share-title">SHARE</p>
+    <div class="page-footer__share-list">
+      <button type="button" class="share-btn-x" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent(document.title),'_blank','noopener')">
+        <img src="{{ "assets/x-circle-b.svg" | relURL }}" alt="Xでシェア" width="44" height="44">
+      </button>
+      <button type="button" class="share-btn-fb" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','noopener')">
+        <img src="{{ "assets/facebook.svg" | relURL }}" alt="Facebookでシェア" width="44" height="44">
+      </button>
+      <button type="button" class="share-btn-link" onclick="(async function() { try { var pageTitle = document.title || ''; var currentUrl = window.location.href; var textToCopy = pageTitle + ' ' + currentUrl; await navigator.clipboard.writeText(textToCopy); window.alert('「' + textToCopy + '」とコピーしました'); } catch (_error) { window.alert('コピーに失敗しました'); } })()">
+        <img src="{{ "assets/link-icon.svg" | relURL }}" alt="リンクをコピー" width="44" height="44">
+      </button>
+    </div>
+  </div>
   <div class="footer__container">
     <div class="footer__body">
       <div class="footer__logo">
