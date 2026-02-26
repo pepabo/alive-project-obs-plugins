@@ -242,11 +242,11 @@ body > * {
 .search-tabs-section .header__search-input {
   width: 100%;
   height: 42px;
-  padding: 0 16px 0 40px;
+  padding: 0 16px 0 44px;
   font-size: 12px;
   letter-spacing: normal;
   background: #f7f7f7;
-  border: none;
+  border: 2px solid #E8E8E8;
 }
 
 .tabs {
