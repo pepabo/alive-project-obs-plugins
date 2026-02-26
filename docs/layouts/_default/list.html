@@ -55,10 +55,10 @@
           {{ if $img }}
           <img src="{{ $img.RelPermalink }}" alt="{{ $page.Title }}" loading="lazy">
           {{ else }}
-          <span class="card-thumb-ph">画像、動画エリア</span>
+          <img src="{{ "assets/card-default-thumb.webp" | relURL }}" alt="{{ $page.Title }}" loading="lazy">
           {{ end }}
           {{ else }}
-          <span class="card-thumb-ph">画像、動画エリア</span>
+          <img src="{{ "assets/card-default-thumb.webp" | relURL }}" alt="{{ $page.Title }}" loading="lazy">
           {{ end }}
         </div>
         <div class="card-body">
@@ -69,6 +69,7 @@
     </div>
     {{ end }}
   </div>
+  <p class="no-results" id="no-results" style="display:none;">フィルターが見つかりません</p>
 
 </div>
 
@@ -77,6 +78,11 @@
 document.querySelectorAll('.card-grid .card-wrap').forEach(function(wrap, index) {
   wrap.style.animationDelay = (index * 0.06) + 's';
 });
+
+function updateNoResults() {
+  var visible = document.querySelectorAll('.card-wrap:not([style*="display: none"])');
+  document.getElementById('no-results').style.display = visible.length === 0 ? '' : 'none';
+}
 
 // 検索機能
 document.getElementById('search-input').addEventListener('input', function() {
@@ -87,6 +93,7 @@ document.getElementById('search-input').addEventListener('input', function() {
     var tags = (wrap.getAttribute('data-tags') || '').toLowerCase();
     wrap.style.display = (title.includes(query) || desc.includes(query) || tags.includes(query)) ? '' : 'none';
   });
+  updateNoResults();
 });
 
 // カテゴリフィルター
@@ -103,6 +110,7 @@ document.querySelectorAll('.tab').forEach(function(tab) {
         wrap.style.display = tags.includes(category) ? '' : 'none';
       }
     });
+    updateNoResults();
   });
 });
 </script>

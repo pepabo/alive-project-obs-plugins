@@ -353,6 +353,14 @@ body > * {
   overflow: visible;
 }
 
+.no-results {
+  text-align: center;
+  color: #43B8FC;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 48px 0;
+}
+
 @keyframes cardFadeIn {
   from {
     opacity: 0;
@@ -466,7 +474,7 @@ body > * {
 }
 
 .card-desc {
-  font-family: var(--font-ja); font-size: 12px; line-height: 18px;
+  font-family: var(--font-ja); font-size: 14px; line-height: 22px;
   color: var(--gray-900);
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -898,6 +906,8 @@ body > * {
   max-width: 720px;
   margin: 0 auto;
   padding: 108px 32px;
+  font-size: 16px;
+  background: #fff;
 }
 
 .single-hero {
@@ -934,7 +944,7 @@ body > * {
 }
 
 .single-description {
-  font-size: 13px; color: var(--gray-900);
+  color: var(--gray-900);
   line-height: 1.7;
 }
 
@@ -985,8 +995,6 @@ body > * {
 /* 事前準備エリア（.preparation-block は JS で div として挿入） */
 .content .preparation-block {
   background: #f8f8f8;
-  margin-left: -1.5rem;
-  margin-right: -1.5rem;
   padding: 1.25rem 1.5rem 1.5rem;
 }
 .content .preparation-block h2 {
@@ -1016,22 +1024,24 @@ body > * {
   margin-top: 1.5rem; margin-bottom: 0.5rem;
 }
 .content p {
-  font-size: 13px; line-height: 1.8;
+  line-height: 1.8;
   color: var(--gray-600); margin-bottom: 1rem;
 }
 .content img { max-width: 100%; height: auto; }
+.content img[alt="Alive Studio"] { max-width: 300px; display: block; margin: 0 auto; }
+.content > p:last-child { text-align: center; }
 .content a {
   color: var(--gray-600); text-decoration: none; font-weight: 500;
 }
 .content a:hover { text-decoration: underline; }
 .content ul, .content ol {
   margin-bottom: 1rem; padding-left: 1.5rem;
-  font-size: 13px; line-height: 1.8;
+  line-height: 1.8;
 }
 .content li { margin-bottom: 0.25rem; }
 .content table {
   width: 100%; border-collapse: collapse;
-  margin-bottom: 1rem; font-size: 12px;
+  margin-bottom: 1rem;
 }
 .content th {
   text-align: left; padding: 8px 12px;
@@ -1081,4 +1091,5 @@ body > * {
 @media (max-width: 480px) {
   .card-grid { grid-template-columns: 1fr; }
   .hero-title { font-size: 32px; }
+  .content img[alt="Alive Studio"] { max-width: 200px; }
 }
