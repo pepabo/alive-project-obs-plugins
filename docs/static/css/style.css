@@ -263,7 +263,7 @@ body > * {
 }
 .page-hero-bg {
   position: absolute; top: 0; left: 0; right: 0;
-  background-image: url('../assets/hero-bg.png');
+  background-image: url('../assets/hero-bg.webp');
   background-size: 100% auto;
   background-position: center -60px;
   background-repeat: no-repeat;

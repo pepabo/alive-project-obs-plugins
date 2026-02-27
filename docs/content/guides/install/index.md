@@ -5,7 +5,7 @@ description: "事前にOBSのインストールが必要です。"
 
 ## 🔧 インストール方法
 
-![ダウンロード手順イメージ](../../images/install-download.png)
+![ダウンロード手順イメージ](../../images/install-download.webp)
 
 1. 各フィルターのページからLuaファイル（`.lua`）をダウンロード
 
