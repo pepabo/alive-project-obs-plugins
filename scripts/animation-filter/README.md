@@ -57,4 +57,4 @@ https://github.com/user-attachments/assets/1e636cc0-e6e9-4af3-94a5-7ee2a77b9a51
 
 ## ライセンス
 
-このソフトウェアはMITライセンスのもとで公開されています。利用に際して生じたいかなる問題についても、開発元は一切の責任を負いません。詳しくは[LICENSE](../../LICENSE)をご確認ください。
+このソフトウェアはMITライセンスのもとで公開されています。利用に際して生じたいかなる問題についても、開発元は一切の責任を負いません。詳しくは[LICENSE](https://raw.githubusercontent.com/pepabo/alive-project-obs-plugins/refs/heads/main/LICENSE)をご確認ください。
