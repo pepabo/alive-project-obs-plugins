@@ -1,6 +1,6 @@
-baseURL = "https://pepabo.github.io/alive-project-obs-plugins/"
+baseURL = "https://alive-project.com/streamer-magazine/lab/"
 languageCode = "ja"
-title = "OBSプラグイン集 - Alive Project"
+title = "ストリーマーマガジン｜配信者を応援するWebメディア"
 
 [markup]
   [markup.goldmark]

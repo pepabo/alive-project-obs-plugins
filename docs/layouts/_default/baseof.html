@@ -4,40 +4,142 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}</title>
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}配信画面をもっとおしゃれに、もっと個性的にしたい方へ！OBSのソースに適用するだけで使える素材をまとめました。{{ end }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="{{ "favicon.png" | relURL }}">
   <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+  <!-- OGP -->
+  <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}">
+  <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}配信画面をもっとおしゃれに、もっと個性的にしたい方へ！OBSのソースに適用するだけで使える素材をまとめました。{{ end }}">
+  <meta property="og:type" content="{{ if .IsHome }}website{{ else }}article{{ end }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:image" content="{{ "assets/OGP-about.png" | absURL }}">
+  <meta property="og:site_name" content="{{ .Site.Title }}">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}">
+  <meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}配信画面をもっとおしゃれに、もっと個性的にしたい方へ！OBSのソースに適用するだけで使える素材をまとめました。{{ end }}">
+  <meta name="twitter:image" content="{{ "assets/OGP-about.png" | absURL }}">
+  <link rel="canonical" href="{{ .Permalink }}">
 </head>
 <body>
-  <header class="site-header">
-    <div class="header-inner">
-      <a href="{{ "" | relURL }}" class="site-logo">
-        <img src="{{ "assets/alive-studio-logo.png" | relURL }}" alt="Alive Studio" class="logo-img">
-        <span class="site-name">OBSプラグイン集</span>
-      </a>
+
+<header class="header">
+  <div class="header__container">
+    <div class="header__logo">
+      <h1 class="header__title">
+        {{ if .IsHome }}
+        <a href="https://alive-project.com/streamer-magazine/">
+          <img src="{{ "assets/streamer-magazine_logo.webp" | relURL }}" alt="ストリーマーマガジン by GMO ペパボ" loading="lazy" width="264" height="48">
+        </a>
+        {{ else }}
+        <a href="{{ "" | relURL }}">
+          <img src="{{ "assets/streamer-magazine_logo.webp" | relURL }}" alt="ストリーマーマガジン by GMO ペパボ" loading="lazy" width="264" height="48">
+        </a>
+        {{ end }}
+      </h1>
+      <ul class="header__SNS-list">
+        <li class="header__SNS-item">
+          <a href="https://x.com/streamer_mag" class="header__SNS-link" target="_blank" rel="noopener noreferrer">
+            <img src="{{ "assets/icon-x.svg" | relURL }}" alt="X" loading="lazy" width="25" height="25" class="header__SNS-icon__image header__SNS-icon__image--x">
+          </a>
+        </li>
+        <li class="header__SNS-item">
+          <a href="https://www.youtube.com/@streamer_magazine" class="header__SNS-link" target="_blank" rel="noopener noreferrer">
+            <img src="{{ "assets/icon-youtube.svg" | relURL }}" alt="YouTube" loading="lazy" width="28" height="20" class="header__SNS-icon__image header__SNS-icon__image--youtube">
+          </a>
+        </li>
+      </ul>
     </div>
-  </header>
+  </div>
+</header>
 
-  <main class="site-main">
-    {{ block "main" . }}{{ end }}
-  </main>
+<main>
+  {{ block "main" . }}{{ end }}
+</main>
 
-  <footer class="site-footer">
-    <p>&copy; 2025 GMO Pepabo, Inc. All rights reserved.</p>
-  </footer>
-  <script>
-  document.addEventListener("click", function(e) {
-    var a = e.target.closest('a[href$=".lua"]');
-    if (!a) return;
-    e.preventDefault();
-    var url = a.href;
-    var filename = url.split("/").pop();
-    fetch(url).then(function(r) { return r.blob(); }).then(function(blob) {
-      var link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = filename;
-      link.click();
-      URL.revokeObjectURL(link.href);
-    });
+<footer class="footer">
+  <div class="footer__share">
+    <p class="page-footer__share-title">ページをシェア</p>
+    <div class="page-footer__share-list">
+      <button type="button" class="share-btn-x" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent(document.title),'_blank','noopener')">
+        <img src="{{ "assets/x-circle-b.svg" | relURL }}" alt="Xでシェア" width="44" height="44">
+      </button>
+      <button type="button" class="share-btn-fb" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','noopener')">
+        <img src="{{ "assets/facebook.svg" | relURL }}" alt="Facebookでシェア" width="44" height="44">
+      </button>
+      <button type="button" class="share-btn-link" onclick="(async function() { try { var pageTitle = document.title || ''; var currentUrl = window.location.href; var textToCopy = pageTitle + ' ' + currentUrl; await navigator.clipboard.writeText(textToCopy); window.alert('「' + textToCopy + '」とコピーしました'); } catch (_error) { window.alert('コピーに失敗しました'); } })()">
+        <img src="{{ "assets/link-icon.svg" | relURL }}" alt="リンクをコピー" width="44" height="44">
+      </button>
+    </div>
+  </div>
+  <div class="footer__container">
+    <div class="footer__body">
+      <div class="footer__logo">
+        <p>
+          <a href="https://alive-project.com/streamer-magazine/">
+            <img src="{{ "assets/streamer-magazine_logo.webp" | relURL }}" alt="ストリーマーマガジン" loading="lazy" width="279" height="48">
+          </a>
+          <p class="footer__copyright"><small>&copy; 2024 Streamer Magazine</small></p>
+        </p>
+      </div>
+      <div class="footer__sitemap">
+        <ul class="footer-nav">
+          <li class="footer__sitemap__list1">
+            <ul class="footer-nav-child">
+              <li><a href="https://alive-project.com/streamer-magazine/about/">ABOUT</a></li>
+              <ul class="footer-nav-grandchild footer-nav-grandchild--single">
+                <li><a href="https://alive-project.com/streamer-magazine/about/">About</a></li>
+              </ul>
+            </ul>
+          <li class="footer__sitemap__list2">
+            <ul class="footer-nav-child">
+              <li><a href="https://alive-project.com/streamer-magazine/archives/">All</a></li>
+              <ul class="footer-nav-grandchild">
+                <li><a href="https://alive-project.com/streamer-magazine/category/news/">News</a></li>
+                <li><a href="https://alive-project.com/streamer-magazine/category/howto/">How to</a></li>
+                <li><a href="https://alive-project.com/streamer-magazine/category/review/">Review</a></li>
+                <li><a href="https://alive-project.com/streamer-magazine/category/report/">Report</a></li>
+                <li><a href="https://alive-project.com/streamer-magazine/category/interview/">Interview</a></li>
+                <li><a href="https://alive-project.com/streamer-magazine/category/column/">Column</a></li>
+              </ul>
+            </ul>
+          </li>
+          <li class="footer__sitemap__list3">
+            <ul class="footer-nav-child">
+              <li class="icon__new-tab"><a target="_blank" rel="noopener" href="https://pepabo.com/">Company</a></li>
+              <li><a href="https://alive-project.com/streamer-magazine/terms-of-service/">terms of service</a></li>
+              <li class="icon__new-tab"><a target="_blank" rel="noopener" href="https://pepabo.com/company/privacy/">Privacy policy</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-layout" id="__pepabo-footer-container"></div>
+</footer>
+
+<!-- GMOグループヘッダー -->
+<script type="text/javascript" charset="UTF-8" src="https://cache.img.gmo.jp/gmo/header/script.min.js" id="gmoheadertag" async="async"></script>
+<!-- GMOグループ・ペパボフッター -->
+<script async type="text/javascript" src="https://asset.pepabo.com/pepabo-footer/pepabo-footer.js"></script>
+<script>
+document.addEventListener("click", function(e) {
+  var a = e.target.closest('a[href$=".lua"]');
+  if (!a) return;
+  e.preventDefault();
+  var url = a.href;
+  var filename = url.split("/").pop();
+  fetch(url).then(function(r) { return r.blob(); }).then(function(blob) {
+    var link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    link.click();
+    URL.revokeObjectURL(link.href);
   });
-  </script>
+});
+</script>
 </body>
 </html>

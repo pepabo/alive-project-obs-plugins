@@ -1,30 +1,117 @@
 {{ define "main" }}
-<div class="list-page">
-  <section class="site-description">
-    <p><a href="https://alive-project.com/" target="_blank" rel="noopener">Alive Project byGMOペパボ</a>が提供する、OBSをもっと便利に使える配信支援ツール集です。</p>
-  </section>
 
-  <section class="filter-list">
-    <div class="card-grid">
-      {{ $filters := where .Site.RegularPages "Section" "filters" }}
-      {{ range $filters }}
+<!-- ===== HERO ===== -->
+<div class="page-hero-bg"></div>
+<header class="page-hero">
+  <div class="page-hero-inner">
+    <h1 class="hero-title"><img src="{{ "assets/logo.svg" | relURL }}" alt="ストラボ" class="hero-title-img"></h1>
+    <p class="hero-desc">
+      いつもの配信を変えたい、個性的にしたい方へ！<br>
+      OBSのソースに適用するだけで使える素材をまとめました。
+    </p>
+  </div>
+</header>
+
+<!-- ===== SEARCH + TABS ===== -->
+{{/* タグ一覧を収集 */}}
+{{ $filters := where .Site.RegularPages "Section" "filters" }}
+{{ $allTags := slice }}
+{{ range $filters }}
+  {{ with .Params.tags }}
+    {{ range . }}
+      {{ $allTags = $allTags | append . }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ $uniqueTags := $allTags | uniq }}
+
+<section class="search-tabs-section">
+  <div class="header__search">
+    <svg class="header__search-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" id="search-input" class="header__search-input" placeholder="いつもの配信を変えるフィルターをさがす">
+  </div>
+  {{ if gt (len $uniqueTags) 0 }}
+  <div class="tabs">
+    <div class="tab on" data-category="all">すべて</div>
+    {{ range $uniqueTags }}
+    <div class="tab" data-category="{{ . }}">{{ . }}</div>
+    {{ end }}
+  </div>
+  {{ end }}
+</section>
+
+<!-- ===== MAIN ===== -->
+<div class="page-main">
+
+  <!-- Card grid -->
+  <div class="card-grid">
+    {{ range $filters }}
+    <div class="card-wrap" data-tags="{{ delimit (.Params.tags | default slice) "," }}" data-title="{{ .Title }}" data-description="{{ .Description }}">
       <a href="{{ .RelPermalink }}" class="card">
-        {{ $page := . }}
-        {{ with .Params.thumbnail }}
-        {{ $img := $page.Resources.GetMatch . }}
-        {{ if $img }}
-        <div class="card-image">
+        <div class="card-thumb">
+          {{ $page := . }}
+          {{ with .Params.thumbnail }}
+          {{ $img := $page.Resources.GetMatch . }}
+          {{ if $img }}
           <img src="{{ $img.RelPermalink }}" alt="{{ $page.Title }}" loading="lazy">
+          {{ else }}
+          <img src="{{ "assets/card-default-thumb.webp" | relURL }}" alt="{{ $page.Title }}" loading="lazy">
+          {{ end }}
+          {{ else }}
+          <img src="{{ "assets/card-default-thumb.webp" | relURL }}" alt="{{ $page.Title }}" loading="lazy">
+          {{ end }}
         </div>
-        {{ end }}
-        {{ end }}
         <div class="card-body">
-          <h2 class="card-title">{{ .Title }}</h2>
-          {{ with .Description }}<p class="card-description">{{ . }}</p>{{ end }}
+          <div class="card-title">{{ .Title }}</div>
+          {{ with .Description }}<div class="card-desc">{{ . }}</div>{{ end }}
         </div>
       </a>
-      {{ end }}
     </div>
-  </section>
+    {{ end }}
+  </div>
+  <p class="no-results" id="no-results" style="display:none;">フィルターが見つかりません</p>
+
 </div>
+
+<script>
+// カード表示アニメーション（左上から順に下→上・フェードイン）
+document.querySelectorAll('.card-grid .card-wrap').forEach(function(wrap, index) {
+  wrap.style.animationDelay = (index * 0.06) + 's';
+});
+
+function updateNoResults() {
+  const visible = document.querySelectorAll('.card-wrap:not([style*="display: none"])');
+  document.getElementById('no-results').style.display = visible.length === 0 ? '' : 'none';
+}
+
+// 検索機能
+document.getElementById('search-input').addEventListener('input', function() {
+  const query = this.value.toLowerCase();
+  document.querySelectorAll('.card-wrap').forEach(function(wrap) {
+    const title = (wrap.getAttribute('data-title') || '').toLowerCase();
+    const desc = (wrap.getAttribute('data-description') || '').toLowerCase();
+    const tags = (wrap.getAttribute('data-tags') || '').toLowerCase();
+    wrap.style.display = (title.includes(query) || desc.includes(query) || tags.includes(query)) ? '' : 'none';
+  });
+  updateNoResults();
+});
+
+// カテゴリフィルター
+document.querySelectorAll('.tab').forEach(function(tab) {
+  tab.addEventListener('click', function() {
+    document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('on'); });
+    this.classList.add('on');
+    const category = this.getAttribute('data-category');
+    document.querySelectorAll('.card-wrap').forEach(function(wrap) {
+      if (category === 'all') {
+        wrap.style.display = '';
+      } else {
+        const tags = (wrap.getAttribute('data-tags') || '').split(',');
+        wrap.style.display = tags.includes(category) ? '' : 'none';
+      }
+    });
+    updateNoResults();
+  });
+});
+</script>
 {{ end }}
