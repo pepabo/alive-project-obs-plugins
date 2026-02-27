@@ -46,4 +46,4 @@
 
 ## ライセンス
 
-このソフトウェアはMITライセンスのもとで公開されています。利用に際して生じたいかなる問題についても、開発元は一切の責任を負いません。詳しくは[LICENSE](../../LICENSE)をご確認ください。
+このソフトウェアはMITライセンスのもとで公開されています。利用に際して生じたいかなる問題についても、開発元は一切の責任を負いません。詳しくは[LICENSE](https://raw.githubusercontent.com/pepabo/alive-project-obs-plugins/refs/heads/main/LICENSE)をご確認ください。
