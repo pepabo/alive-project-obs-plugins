@@ -53,6 +53,9 @@ for filter_dir in "${SCRIPTS_DIR}"/*/; do
   # ../../LICENSE -> GitHub LICENSE URL
   content="$(echo "${content}" | sed "s|../../LICENSE|${LICENSE_URL}|g")"
 
+  # GitHub user-attachments video URLs -> <video> tags
+  content="$(echo "${content}" | sed -E 's|^https://github\.com/user-attachments/assets/[a-zA-Z0-9-]+$|<video src="&" controls playsinline muted loop style="max-width:100%;height:auto;"></video>|')"
+
   # Write index.md with front matter
   # Build thumbnail front matter line
   thumbnail_line=""
