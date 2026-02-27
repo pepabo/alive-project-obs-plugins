@@ -80,17 +80,17 @@ document.querySelectorAll('.card-grid .card-wrap').forEach(function(wrap, index)
 });
 
 function updateNoResults() {
-  var visible = document.querySelectorAll('.card-wrap:not([style*="display: none"])');
+  const visible = document.querySelectorAll('.card-wrap:not([style*="display: none"])');
   document.getElementById('no-results').style.display = visible.length === 0 ? '' : 'none';
 }
 
 // 検索機能
 document.getElementById('search-input').addEventListener('input', function() {
-  var query = this.value.toLowerCase();
+  const query = this.value.toLowerCase();
   document.querySelectorAll('.card-wrap').forEach(function(wrap) {
-    var title = (wrap.getAttribute('data-title') || '').toLowerCase();
-    var desc = (wrap.getAttribute('data-description') || '').toLowerCase();
-    var tags = (wrap.getAttribute('data-tags') || '').toLowerCase();
+    const title = (wrap.getAttribute('data-title') || '').toLowerCase();
+    const desc = (wrap.getAttribute('data-description') || '').toLowerCase();
+    const tags = (wrap.getAttribute('data-tags') || '').toLowerCase();
     wrap.style.display = (title.includes(query) || desc.includes(query) || tags.includes(query)) ? '' : 'none';
   });
   updateNoResults();
@@ -101,12 +101,12 @@ document.querySelectorAll('.tab').forEach(function(tab) {
   tab.addEventListener('click', function() {
     document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('on'); });
     this.classList.add('on');
-    var category = this.getAttribute('data-category');
+    const category = this.getAttribute('data-category');
     document.querySelectorAll('.card-wrap').forEach(function(wrap) {
       if (category === 'all') {
         wrap.style.display = '';
       } else {
-        var tags = (wrap.getAttribute('data-tags') || '').split(',');
+        const tags = (wrap.getAttribute('data-tags') || '').split(',');
         wrap.style.display = tags.includes(category) ? '' : 'none';
       }
     });
