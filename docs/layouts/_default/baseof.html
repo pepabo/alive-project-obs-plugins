@@ -52,24 +52,6 @@
         </li>
       </ul>
     </div>
-    <!-- Search input (1024px+) -->
-    <div class="header__search__wrap">
-      <div class="header__search">
-        <svg class="header__search-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input class="header__search-input" type="text" placeholder="SEARCH">
-      </div>
-    </div>
-    <!-- Search icon button (≤1023px) -->
-    <button class="header__search-btn" type="button" aria-label="検索を開く">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    </button>
-  </div>
-  <!-- Search panel (≤1023px, toggle) -->
-  <div class="header__search-panel" aria-hidden="true">
-    <div class="header__search-panel-inner">
-      <svg class="header__search-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input class="header__search-panel-input" type="text" placeholder="SEARCH">
-    </div>
   </div>
 </header>
 
@@ -138,34 +120,6 @@
   <div class="footer-layout" id="__pepabo-footer-container"></div>
 </footer>
 
-<!-- Search panel toggle -->
-<script>
-(function() {
-  var btn = document.querySelector('.header__search-btn');
-  var panel = document.querySelector('.header__search-panel');
-  if (!btn || !panel) return;
-  btn.addEventListener('click', function() {
-    var isOpen = panel.classList.toggle('is-open');
-    panel.setAttribute('aria-hidden', String(!isOpen));
-    if (isOpen) {
-      var input = panel.querySelector('.header__search-panel-input');
-      if (input) setTimeout(function() { input.focus(); }, 100);
-    }
-  });
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && panel.classList.contains('is-open')) {
-      panel.classList.remove('is-open');
-      panel.setAttribute('aria-hidden', 'true');
-    }
-  });
-  window.addEventListener('resize', function() {
-    if (window.innerWidth >= 1024 && panel.classList.contains('is-open')) {
-      panel.classList.remove('is-open');
-      panel.setAttribute('aria-hidden', 'true');
-    }
-  });
-})();
-</script>
 <!-- GMOグループヘッダー -->
 <script type="text/javascript" charset="UTF-8" src="https://cache.img.gmo.jp/gmo/header/script.min.js" id="gmoheadertag" async="async"></script>
 <!-- GMOグループ・ペパボフッター -->

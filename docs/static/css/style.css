@@ -123,13 +123,16 @@ body > * {
   margin: 0;
 }
 @media screen and (max-width: 480px) {
+  .header__logo {
+    justify-content: space-between;
+  }
   .header__SNS-list {
     gap: 0;
     padding-inline-start: 0;
-    padding-inline-end: 1rem;
+    padding-inline-end: 0;
     border-left: none;
-    border-right: 1px solid #A3A3A3;
-    margin-right: 0.5rem;
+    border-right: none;
+    margin-right: 0;
   }
 }
 .header__SNS-link {
