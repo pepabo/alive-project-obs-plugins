@@ -253,12 +253,11 @@ float4 PS(VertData v_in) : TARGET {
     float scale_factor = max(abs(cos(angle_rad)), 0.05);
     
     // 裏面表示の判定（90度〜270度の間は裏面）
-    bool show_backside = (angle > 90 && angle < 270);
-    
+    // OBSのエフェクトパーサーはbool型と&&演算子を未サポートのため、step関数で代替
+    float is_backside = step(90.0, angle) * (1.0 - step(270.0, angle));
+
     // 裏面表示のときはX座標を反転
-    if (show_backside) {
-        centered_uv.x = -centered_uv.x;
-    }
+    centered_uv.x = centered_uv.x * (1.0 - 2.0 * is_backside);
     
     // 横方向のスケーリングを適用（3D回転効果）
     centered_uv.x = centered_uv.x / scale_factor;
