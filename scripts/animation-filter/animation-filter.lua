@@ -165,7 +165,7 @@ source_def.video_render = function(filter, effect)
 
     -- パラメータ設定
     obs.gs_effect_set_float(filter.params.animation_time, animation_time)
-    obs.gs_effect_set_int(filter.params.animation_type, animation_type_num)
+    obs.gs_effect_set_float(filter.params.animation_type, animation_type_num)
     obs.gs_effect_set_float(filter.params.animation_intensity, filter.animation_intensity)
     obs.gs_effect_set_float(filter.params.resolution_x, filter.width)
     obs.gs_effect_set_float(filter.params.resolution_y, filter.height)
@@ -257,7 +257,7 @@ uniform texture2d image;
 
 // アニメーションパラメータ
 uniform float animation_time;
-uniform int animation_type;
+uniform float animation_type;
 uniform float animation_intensity;
 uniform float resolution_x;
 uniform float resolution_y;
@@ -292,20 +292,20 @@ float4 PS(VertData v_in) : TARGET {
 
     // ランダムモード用の変数
     float random_seed = floor(animation_time * 0.2); // 約5秒ごとに変化
-    float random_type = floor(random(random_seed) * 9) + 1; // 1～9のランダム値
+    float random_type = floor(random(random_seed) * 9.0) + 1.0; // 1～9のランダム値
 
     // アニメーションタイプの決定（ランダムモードの場合は動的に決定）
-    int current_type = animation_type;
-    if (animation_type == 10) { // ランダムモード
-        current_type = int(random_type);
+    float current_type = animation_type;
+    if (animation_type > 9.5) { // ランダムモード
+        current_type = floor(random_type);
     }
 
     // アニメーションタイプに応じた変換を適用
-    if (current_type == 1) { // ゆらゆら（波のような動き）
+    if (current_type < 1.5) { // ゆらゆら（波のような動き）
         uv.x += sin(animation_time * 2 + uv.y * 10) * 0.02 * intensity;
         uv.y += sin(animation_time * 1.5 + uv.x * 8) * 0.01 * intensity;
     }
-    else if (current_type == 2) { // ぴょんぴょん（ジャンプ）
+    else if (current_type < 2.5) { // ぴょんぴょん（ジャンプ）
         float jump = abs(sin(animation_time * 3)) * 0.05 * intensity;
         float stretch = 1.0 + sin(animation_time * 3) * 0.03 * intensity;
 
@@ -317,7 +317,7 @@ float4 PS(VertData v_in) : TARGET {
         uv = rel_uv + center;
         uv.y -= jump;
     }
-    else if (current_type == 3) { // ぽよぽよ（パルス・拡大縮小）
+    else if (current_type < 3.5) { // ぽよぽよ（パルス・拡大縮小）
         float pulse = 1.0 + sin(animation_time * 4) * 0.05 * intensity;
 
         // 中心からの相対座標
@@ -329,11 +329,11 @@ float4 PS(VertData v_in) : TARGET {
         // 中心に戻す
         uv = rel_uv + center;
     }
-    else if (current_type == 4) { // ぶるぶる（シェイク）
+    else if (current_type < 4.5) { // ぶるぶる（シェイク）
         uv.x += sin(animation_time * 20) * 0.01 * intensity;
         uv.y += cos(animation_time * 18) * 0.005 * intensity;
     }
-    else if (current_type == 5) { // ふわふわ（浮遊感）
+    else if (current_type < 5.5) { // ふわふわ（浮遊感）
         // 浮遊する動き
         uv.y += sin(animation_time * 1.2) * 0.03 * intensity;
 
@@ -355,7 +355,7 @@ float4 PS(VertData v_in) : TARGET {
         // 中心に戻す
         uv = rotated_uv + center;
     }
-    else if (current_type == 6) { // ばんばん（弾む）
+    else if (current_type < 6.5) { // ばんばん（弾む）
         float bounce = abs(frac(animation_time * 0.8) * 2.0 - 1.0);
         bounce = 1.0 - bounce * bounce; // イージング
 
@@ -374,7 +374,7 @@ float4 PS(VertData v_in) : TARGET {
         // 上方向への移動
         uv.y += bounce * 0.05 * intensity;
     }
-    else if (current_type == 7) { // もじもじ（恥ずかしがるような動き）
+    else if (current_type < 7.5) { // もじもじ（恥ずかしがるような動き）
         // もじもじの基本パターン（小刻みに揺れる）
         float time_factor = animation_time * 5.0;
 
@@ -403,7 +403,7 @@ float4 PS(VertData v_in) : TARGET {
         // 縮こまる動きを適用（中心に向かって少し引っ張られる）
         uv = lerp(uv, center, shrink * edge_factor);
     }
-    else if (current_type == 8) { // にこにこ（笑顔のような膨らむ動き）
+    else if (current_type < 8.5) { // にこにこ（笑顔のような膨らむ動き）
         // よりはっきりとした笑顔の動き
         float smile_time = animation_time * 1.2;
         float smile_strength = (sin(smile_time) * 0.5 + 0.5) * intensity * 0.2; // 強度を2倍に
@@ -412,9 +412,9 @@ float4 PS(VertData v_in) : TARGET {
         float2 rel_uv = uv - center;
 
         // 下半分を膨らませる（笑顔のように）
-        if (rel_uv.y > 0) {
+        if (rel_uv.y > 0.0) {
             // 下半分の中央部分を強調
-            float y_factor = smoothstep(0, 0.5, rel_uv.y);
+            float y_factor = smoothstep(0.0, 0.5, rel_uv.y);
             float x_factor = pow(1.0 - min(1.0, abs(rel_uv.x) * 2.5), 2.0); // より中央に集中
 
             // 横方向に膨らむ（より強く）
@@ -425,7 +425,7 @@ float4 PS(VertData v_in) : TARGET {
         }
         // 上半分は少し縮める（目が細くなるイメージ）
         else {
-            float y_factor = smoothstep(-0.4, 0, rel_uv.y);
+            float y_factor = smoothstep(-0.4, 0.0, rel_uv.y);
             float x_factor = 1.0 - min(1.0, abs(rel_uv.x) * 3.0);
 
             // 上部中央を少し下に引っ張る（目が細くなる感じ）
@@ -438,7 +438,7 @@ float4 PS(VertData v_in) : TARGET {
         // 全体的に少し上に移動（笑顔で上を向くような感じ）
         uv.y -= smile_strength * 0.03;
     }
-    else if (current_type == 9) { // どきどき（鼓動のような動き）
+    else if (current_type < 9.5) { // どきどき（鼓動のような動き）
         // 鼓動のタイミング（不規則に）
         float beat_time = animation_time * 1.2;
         float beat_phase = frac(beat_time);
@@ -461,8 +461,8 @@ float4 PS(VertData v_in) : TARGET {
     }
 
     // 範囲外の場合は透明を返す
-    if (uv.x < 0 || uv.x > 1 || uv.y < 0 || uv.y > 1) {
-        return float4(0, 0, 0, 0);
+    if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) {
+        return float4(0.0, 0.0, 0.0, 0.0);
     }
 
     return image.Sample(linearSampler, uv);
