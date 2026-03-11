@@ -47,8 +47,8 @@ for filter_dir in "${SCRIPTS_DIR}"/*/; do
   content="$(tail -n +2 "${readme}")"
 
   # Apply path transformations
-  # ../../assets/alive-studio-logo.webp -> /alive-project-obs-plugins/assets/alive-studio-logo.webp
-  content="$(echo "${content}" | sed 's|../../assets/alive-studio-logo.webp|/alive-project-obs-plugins/assets/alive-studio-logo.webp|g')"
+  # ../../assets/alive-studio-logo.webp -> /streamer-magazine/lab/assets/alive-studio-logo.webp
+  content="$(echo "${content}" | sed 's|../../assets/alive-studio-logo.webp|/streamer-magazine/lab/assets/alive-studio-logo.webp|g')"
 
   # ../../LICENSE -> GitHub LICENSE URL
   content="$(echo "${content}" | sed "s|../../LICENSE|${LICENSE_URL}|g")"
