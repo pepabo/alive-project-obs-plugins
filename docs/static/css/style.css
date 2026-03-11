@@ -266,13 +266,73 @@ body > * {
 }
 .page-hero-bg {
   position: absolute; top: 0; left: 0; right: 0;
-  background-image: url('../assets/hero-bg.webp');
-  background-size: 100% auto;
-  background-position: center -60px;
-  background-repeat: no-repeat;
   height: 100vh;
   pointer-events: none;
   z-index: 0;
+  overflow: hidden;
+}
+
+/* ---- Hero decorative SVG elements ---- */
+.hero-deco {
+  position: absolute;
+  pointer-events: none;
+  display: block;
+}
+
+/* Left: large blue-purple circle */
+.hero-deco--circle-large {
+  width: 360px;
+  left: -130px;
+  top: -50px;
+}
+
+/* Left: small blue-pink circle */
+.hero-deco--circle-small {
+  width: 140px;
+  left: 40px;
+  top: -10px;
+}
+
+/* Left: light blue arc */
+.hero-deco--arc {
+  width: 75px;
+  left: 15px;
+  top: 170px;
+}
+
+/* Left: blue diagonal line */
+.hero-deco--line {
+  width: 65px;
+  left: 75px;
+  top: 220px;
+}
+
+/* Left: pink hatching */
+.hero-deco--hatching-pink {
+  width: 100px;
+  left: -10px;
+  top: 280px;
+}
+
+/* Right: large triangle */
+.hero-deco--triangle {
+  width: 380px;
+  right: -50px;
+  top: -60px;
+}
+
+/* Right: diamond */
+.hero-deco--diamond {
+  width: 140px;
+  right: 15px;
+  top: 130px;
+}
+
+/* Right: purple hatching */
+.hero-deco--hatching-purple {
+  width: 280px;
+  right: -10px;
+  top: 55px;
 }
 .page-hero-inner {
   position: relative; z-index: 1;
@@ -1082,6 +1142,7 @@ body > * {
   .page-hero { padding: 120px 16px 32px; min-height: 200px; }
   .hero-title { font-size: 40px; }
   .hero-title-img { width: 80%; height: auto; max-width: none; }
+  .hero-deco { opacity: 0.6; }
   .search-tabs-section { padding: 24px 16px 0; }
   .page-main { padding: 24px 16px 48px; }
   .card-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
