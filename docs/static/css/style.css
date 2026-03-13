@@ -1197,5 +1197,4 @@ body > * {
   .card-grid { grid-template-columns: 1fr; }
   .hero-title { font-size: 32px; }
   .page-hero-bg { top: 18vw; }
-  .content img[alt="Alive Studio"] { max-width: 200px; }
 }
