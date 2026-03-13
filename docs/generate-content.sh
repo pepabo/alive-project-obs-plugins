@@ -15,10 +15,6 @@ LICENSE_URL="${GITHUB_REPO_URL}/blob/main/LICENSE"
 rm -rf "${CONTENT_DIR}"
 mkdir -p "${CONTENT_DIR}"
 
-# Copy logo to static assets
-mkdir -p "${DOCS_DIR}/static/assets"
-cp "${REPO_ROOT}/assets/alive-studio-logo.webp" "${DOCS_DIR}/static/assets/"
-
 for filter_dir in "${SCRIPTS_DIR}"/*/; do
   filter_name="$(basename "${filter_dir}")"
   readme="${filter_dir}/README.md"
@@ -47,9 +43,6 @@ for filter_dir in "${SCRIPTS_DIR}"/*/; do
   content="$(tail -n +2 "${readme}")"
 
   # Apply path transformations
-  # ../../assets/alive-studio-logo.webp -> /streamer-magazine/lab/assets/alive-studio-logo.webp
-  content="$(echo "${content}" | sed 's|../../assets/alive-studio-logo.webp|/streamer-magazine/lab/assets/alive-studio-logo.webp|g')"
-
   # ../../LICENSE -> GitHub LICENSE URL
   content="$(echo "${content}" | sed "s|../../LICENSE|${LICENSE_URL}|g")"
 

@@ -712,11 +712,17 @@ body > * {
   text-align: center;
   margin: 0 0 24px;
 }
+.footer__logo img {
+  margin: 0 auto;
+}
 @media screen and (min-width: 1024px) {
   .footer__logo {
     text-align: left;
     grid-area: logo;
     margin-bottom: 0;
+  }
+  .footer__logo img {
+    margin: 0;
   }
 }
 .footer__copyright {
@@ -1107,8 +1113,7 @@ body > * {
   color: var(--gray-600); margin-bottom: 1rem;
 }
 .content img { max-width: 100%; height: auto; }
-.content img[alt="Alive Studio"] { max-width: 300px; display: block; margin: 0 auto; }
-.content > p:last-child { text-align: center; }
+.content > p:last-child { text-align: left; }
 .content a {
   color: var(--gray-600); text-decoration: none; font-weight: 500;
 }
