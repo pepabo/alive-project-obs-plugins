@@ -108,28 +108,28 @@
 <script>
 // ヒーロデコレーション: ドロップイン → スクロールジャック(上へフェードアウト) → 通常スクロール
 (function() {
-  var decos = document.querySelectorAll('.hero-deco');
+  const decos = document.querySelectorAll('.hero-deco');
   //           triangle, circle-s, arc, hatch-pk, circle-l, line, hatch-p, diamond
-  var spinSpeed = [0.006, -0.02, 0.012, 0, 0.015, 0, 0, 0.01];
+  const spinSpeed = [0.006, -0.02, 0.012, 0, 0.015, 0, 0, 0.01];
 
   // ドロップイン: top位置順にディレイ
-  var dropDelay = [0.15, 0.3, 0.55, 0.85, 0, 0.55, 0.4, 0.7];
-  var dropDuration = 0.5;
+  const dropDelay = [0.15, 0.3, 0.55, 0.85, 0, 0.55, 0.4, 0.7];
+  const dropDuration = 0.5;
 
-  var targetOpacity = [];
+  const targetOpacity = [];
   decos.forEach(function(el) {
     targetOpacity.push(parseFloat(getComputedStyle(el).getPropertyValue('--deco-opacity')) || 1);
   });
 
   // フェーズ: 'drop'(ドロップイン) → 'jack'(スクロールジャック) → 'normal'(通常)
-  var phase = 'drop';
-  var jackProgress = 0; // 0〜1
-  var dropStart = performance.now();
-  var dropTotalTime = 0.85 + dropDuration; // 最後のドロップ完了時間
+  let phase = 'drop';
+  let jackProgress = 0; // 0〜1
+  const dropStart = performance.now();
+  const dropTotalTime = 0.85 + dropDuration; // 最後のドロップ完了時間
 
   // wheel/touchでスクロールジャック
-  var accumulated = 0;
-  var jackThreshold = 150; // この量のwheelデルタでジャック完了
+  let accumulated = 0;
+  const jackThreshold = 150; // この量のwheelデルタでジャック完了
 
   function onWheel(e) {
     if (phase === 'jack') {
@@ -148,10 +148,10 @@
     }
   }
 
-  var touchStartY = 0;
+  let touchStartY = 0;
   function onTouchStart(e) { touchStartY = e.touches[0].clientY; }
   function onTouchMove(e) {
-    var delta = touchStartY - e.touches[0].clientY;
+    const delta = touchStartY - e.touches[0].clientY;
     touchStartY = e.touches[0].clientY;
     if (phase === 'jack') {
       e.preventDefault();
@@ -171,8 +171,8 @@
   window.addEventListener('touchmove', onTouchMove, { passive: false });
 
   function tick() {
-    var now = performance.now();
-    var elapsed = (now - dropStart) / 1000;
+    const now = performance.now();
+    const elapsed = (now - dropStart) / 1000;
 
     // ドロップ完了したらジャックフェーズへ
     if (phase === 'drop' && elapsed > dropTotalTime) {
@@ -180,19 +180,19 @@
     }
 
     decos.forEach(function(el, i) {
-      var rot = spinSpeed[i] * (now - dropStart);
+      const rot = spinSpeed[i] * (now - dropStart);
 
       if (phase === 'drop') {
         // ドロップインアニメーション
-        var t = Math.max(0, elapsed - dropDelay[i]);
-        var progress = Math.min(t / dropDuration, 1);
-        var ease = 1 - Math.pow(1 - progress, 3);
-        var dropY = -50 * (1 - ease);
+        const t = Math.max(0, elapsed - dropDelay[i]);
+        const progress = Math.min(t / dropDuration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        const dropY = -50 * (1 - ease);
         el.style.transform = 'translateY(' + dropY + 'px) rotate(' + rot + 'deg)';
         el.style.opacity = ease * targetOpacity[i];
       } else if (phase === 'jack') {
         // スクロールジャック: 上へ移動 + フェードアウト
-        var moveUp = -80 * jackProgress;
+        const moveUp = -80 * jackProgress;
         el.style.transform = 'translateY(' + moveUp + 'px) rotate(' + rot + 'deg)';
         el.style.opacity = targetOpacity[i] * (1 - jackProgress);
       } else {

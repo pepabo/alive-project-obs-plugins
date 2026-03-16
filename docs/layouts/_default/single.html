@@ -33,19 +33,19 @@
   {{ if eq .Section "filters" }}
   <script>
   (function() {
-    var content = document.getElementById('install');
+    const content = document.getElementById('install');
     if (!content || content.getAttribute('data-section') !== 'filters') return;
-    var firstH2 = content.querySelector('h2:first-of-type');
+    const firstH2 = content.querySelector('h2:first-of-type');
     if (!firstH2) return;
-    var nodes = [];
-    var el = firstH2;
+    const nodes = [];
+    let el = firstH2;
     while (el) {
       if (el.tagName === 'H2' && nodes.length > 0) break;
       nodes.push(el);
       el = el.nextElementSibling;
     }
     if (nodes.length === 0) return;
-    var wrap = document.createElement('div');
+    const wrap = document.createElement('div');
     wrap.className = 'preparation-block';
     nodes[0].parentNode.insertBefore(wrap, nodes[0]);
     nodes.forEach(function(n) { wrap.appendChild(n); });
