@@ -1,7 +1,39 @@
 {{ define "main" }}
 
 <!-- ===== HERO ===== -->
-<div class="page-hero-bg"></div>
+<div class="page-hero-bg">
+  <!-- Left side -->
+  <img src="{{ "assets/hero/vector2.svg" | relURL }}" alt="" class="hero-deco hero-deco--triangle">
+  <svg class="hero-deco hero-deco--circle-small" viewBox="0 0 197 197" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path class="circle-small-path" d="M195.781 107.794C201.117 53.8636 161.723 5.81961 107.793 0.484219C53.8632 -4.85117 5.81922 34.5424 0.483826 88.4724C-4.85157 142.402 34.5421 190.446 88.472 195.782C142.402 201.117 190.446 161.723 195.781 107.794Z" fill="url(#paint-circle-small)" stroke="url(#paint-circle-small)" stroke-width="2"/>
+    <defs>
+      <linearGradient id="paint-circle-small" x1="-10.1693" y1="186.322" x2="76.3311" y2="-65.3342" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#43B8FC"/><stop offset="1" stop-color="#F24BE1"/>
+      </linearGradient>
+    </defs>
+  </svg>
+  <img src="{{ "assets/hero/vector3.svg" | relURL }}" alt="" class="hero-deco hero-deco--arc">
+  <svg class="hero-deco hero-deco--hatching-pink" viewBox="0 0 146 146" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#clip-hatch-pink)">
+      <g class="hatching-pink-lines">
+        <path d="M-0.5 -96L-338 241.5" stroke="#F24BE1" stroke-width="2"/><path d="M16.5 -96L-321 241.5" stroke="#F24BE1" stroke-width="2"/><path d="M33.5 -96L-304 241.5" stroke="#F24BE1" stroke-width="2"/><path d="M50.5 -96L-287 241.5" stroke="#F24BE1" stroke-width="2"/><path d="M67.5 -96L-270 241.5" stroke="#F24BE1" stroke-width="2"/><path d="M84.5 -96L-253 241.5" stroke="#F24BE1" stroke-width="2"/><path d="M101.5 -96L-236 241.5" stroke="#F24BE1" stroke-width="2"/><path d="M118.5 -96L-219 241.5" stroke="#F24BE1" stroke-width="2"/><path d="M135.5 -96L-202 241.5" stroke="#F24BE1" stroke-width="2"/><path d="M152.5 -96L-185 241.5" stroke="#F24BE1" stroke-width="2"/><path d="M169.5 -96L-168 241.5" stroke="#F24BE1" stroke-width="2"/><path d="M186.5 -96L-151 241.5" stroke="#F24BE1" stroke-width="2"/><path d="M203.5 -96L-134 241.5" stroke="#F24BE1" stroke-width="2"/><path d="M220.5 -96L-117 241.5" stroke="#F24BE1" stroke-width="2"/><path d="M237.5 -96L-100 241.5" stroke="#F24BE1" stroke-width="2"/><path d="M254.5 -96L-83 241.5" stroke="#F24BE1" stroke-width="2"/><path d="M271.5 -96L-66 241.5" stroke="#F24BE1" stroke-width="2"/><path d="M288.5 -96L-49 241.5" stroke="#F24BE1" stroke-width="2"/><path d="M305.5 -96L-32 241.5" stroke="#F24BE1" stroke-width="2"/><path d="M322.5 -96L-15 241.5" stroke="#F24BE1" stroke-width="2"/><path d="M339.5 -96L2 241.5" stroke="#F24BE1" stroke-width="2"/><path d="M356.5 -96L19 241.5" stroke="#F24BE1" stroke-width="2"/><path d="M373.5 -96L36 241.5" stroke="#F24BE1" stroke-width="2"/>
+      </g>
+    </g>
+    <defs><clipPath id="clip-hatch-pink"><rect width="146" height="146" fill="white"/></clipPath></defs>
+  </svg>
+  <!-- Right side -->
+  <img src="{{ "assets/hero/vector4.svg" | relURL }}" alt="" class="hero-deco hero-deco--circle-large">
+  <img src="{{ "assets/hero/vector6.svg" | relURL }}" alt="" class="hero-deco hero-deco--line">
+  <svg class="hero-deco hero-deco--hatching-purple" viewBox="0 0 407 146" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#clip-hatch-purple)">
+      <g class="hatching-purple-lines">
+        <path d="M100.5 -96L-237 241.5" stroke="#9A81EF" stroke-width="2"/><path d="M117.5 -96L-220 241.5" stroke="#9A81EF" stroke-width="2"/><path d="M134.5 -96L-203 241.5" stroke="#9A81EF" stroke-width="2"/><path d="M151.5 -96L-186 241.5" stroke="#9A81EF" stroke-width="2"/><path d="M168.5 -96L-169 241.5" stroke="#9A81EF" stroke-width="2"/><path d="M185.5 -96L-152 241.5" stroke="#9A81EF" stroke-width="2"/><path d="M202.5 -96L-135 241.5" stroke="#9A81EF" stroke-width="2"/><path d="M219.5 -96L-118 241.5" stroke="#9A81EF" stroke-width="2"/><path d="M236.5 -96L-101 241.5" stroke="#9A81EF" stroke-width="2"/><path d="M253.5 -96L-84 241.5" stroke="#9A81EF" stroke-width="2"/><path d="M270.5 -96L-67 241.5" stroke="#9A81EF" stroke-width="2"/><path d="M287.5 -96L-50 241.5" stroke="#9A81EF" stroke-width="2"/><path d="M304.5 -96L-33 241.5" stroke="#9A81EF" stroke-width="2"/><path d="M321.5 -96L-16 241.5" stroke="#9A81EF" stroke-width="2"/><path d="M338.5 -96L1 241.5" stroke="#9A81EF" stroke-width="2"/><path d="M355.5 -96L18 241.5" stroke="#9A81EF" stroke-width="2"/><path d="M372.5 -96L35 241.5" stroke="#9A81EF" stroke-width="2"/><path d="M389.5 -96L52 241.5" stroke="#9A81EF" stroke-width="2"/><path d="M406.5 -96L69 241.5" stroke="#9A81EF" stroke-width="2"/><path d="M423.5 -96L86 241.5" stroke="#9A81EF" stroke-width="2"/><path d="M440.5 -96L103 241.5" stroke="#9A81EF" stroke-width="2"/><path d="M457.5 -96L120 241.5" stroke="#9A81EF" stroke-width="2"/><path d="M474.5 -96L137 241.5" stroke="#9A81EF" stroke-width="2"/><path d="M491.5 -96L154 241.5" stroke="#9A81EF" stroke-width="2"/><path d="M508.5 -96L171 241.5" stroke="#9A81EF" stroke-width="2"/><path d="M525.5 -96L188 241.5" stroke="#9A81EF" stroke-width="2"/><path d="M542.5 -96L205 241.5" stroke="#9A81EF" stroke-width="2"/><path d="M559.5 -96L222 241.5" stroke="#9A81EF" stroke-width="2"/><path d="M576.5 -96L239 241.5" stroke="#9A81EF" stroke-width="2"/><path d="M593.5 -96L256 241.5" stroke="#9A81EF" stroke-width="2"/><path d="M610.5 -96L273 241.5" stroke="#9A81EF" stroke-width="2"/><path d="M627.5 -96L290 241.5" stroke="#9A81EF" stroke-width="2"/><path d="M644.5 -96L307 241.5" stroke="#9A81EF" stroke-width="2"/>
+      </g>
+    </g>
+    <defs><clipPath id="clip-hatch-purple"><rect width="407" height="146" fill="white"/></clipPath></defs>
+  </svg>
+  <img src="{{ "assets/hero/vector5.svg" | relURL }}" alt="" class="hero-deco hero-deco--diamond">
+</div>
 <header class="page-hero">
   <div class="page-hero-inner">
     <h1 class="hero-title"><img src="{{ "assets/logo.svg" | relURL }}" alt="ストラボ" class="hero-title-img"></h1>
@@ -74,9 +106,108 @@
 </div>
 
 <script>
+// ヒーロデコレーション: ドロップイン → スクロールジャック(上へフェードアウト) → 通常スクロール
+(function() {
+  const decos = document.querySelectorAll('.hero-deco');
+  //           triangle, circle-s, arc, hatch-pk, circle-l, line, hatch-p, diamond
+  const spinSpeed = [0.006, -0.02, 0.012, 0, 0.015, 0, 0, 0.01];
+
+  // ドロップイン: top位置順にディレイ
+  const dropDelay = [0.15, 0.3, 0.55, 0.85, 0, 0.55, 0.4, 0.7];
+  const dropDuration = 0.5;
+
+  const targetOpacity = [];
+  decos.forEach(function(el) {
+    targetOpacity.push(parseFloat(getComputedStyle(el).getPropertyValue('--deco-opacity')) || 1);
+  });
+
+  // フェーズ: 'drop'(ドロップイン) → 'jack'(スクロールジャック) → 'normal'(通常)
+  let phase = 'drop';
+  let jackProgress = 0; // 0〜1
+  const dropStart = performance.now();
+  const dropTotalTime = 0.85 + dropDuration; // 最後のドロップ完了時間
+
+  // wheel/touchでスクロールジャック
+  let accumulated = 0;
+  const jackThreshold = 150; // この量のwheelデルタでジャック完了
+
+  function onWheel(e) {
+    if (phase === 'jack') {
+      e.preventDefault();
+      accumulated += e.deltaY;
+      jackProgress = Math.max(0, Math.min(1, accumulated / jackThreshold));
+      if (jackProgress >= 1) phase = 'normal';
+    } else if (phase === 'normal' && window.scrollY <= 0 && e.deltaY < 0) {
+      e.preventDefault();
+      phase = 'jack';
+      accumulated = jackThreshold;
+      jackProgress = 1;
+    }
+    if (phase === 'jack' && jackProgress <= 0) {
+      phase = 'jack'; // 戻り中
+    }
+  }
+
+  let touchStartY = 0;
+  function onTouchStart(e) { touchStartY = e.touches[0].clientY; }
+  function onTouchMove(e) {
+    const delta = touchStartY - e.touches[0].clientY;
+    touchStartY = e.touches[0].clientY;
+    if (phase === 'jack') {
+      e.preventDefault();
+      accumulated += delta;
+      jackProgress = Math.max(0, Math.min(1, accumulated / jackThreshold));
+      if (jackProgress >= 1) phase = 'normal';
+    } else if (phase === 'normal' && window.scrollY <= 0 && delta < 0) {
+      e.preventDefault();
+      phase = 'jack';
+      accumulated = jackThreshold;
+      jackProgress = 1;
+    }
+  }
+
+  window.addEventListener('wheel', onWheel, { passive: false });
+  window.addEventListener('touchstart', onTouchStart, { passive: true });
+  window.addEventListener('touchmove', onTouchMove, { passive: false });
+
+  function tick() {
+    const now = performance.now();
+    const elapsed = (now - dropStart) / 1000;
+
+    // ドロップ完了したらジャックフェーズへ
+    if (phase === 'drop' && elapsed > dropTotalTime) {
+      phase = 'jack';
+    }
+
+    decos.forEach(function(el, i) {
+      const rot = spinSpeed[i] * (now - dropStart);
+
+      if (phase === 'drop') {
+        // ドロップインアニメーション
+        const t = Math.max(0, elapsed - dropDelay[i]);
+        const progress = Math.min(t / dropDuration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        const dropY = -50 * (1 - ease);
+        el.style.transform = 'translateY(' + dropY + 'px) rotate(' + rot + 'deg)';
+        el.style.opacity = ease * targetOpacity[i];
+      } else if (phase === 'jack') {
+        // スクロールジャック: 上へ移動 + フェードアウト
+        const moveUp = -80 * jackProgress;
+        el.style.transform = 'translateY(' + moveUp + 'px) rotate(' + rot + 'deg)';
+        el.style.opacity = targetOpacity[i] * (1 - jackProgress);
+      } else {
+        // 通常スクロール: 非表示のまま
+        el.style.opacity = 0;
+      }
+    });
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+})();
+
 // カード表示アニメーション（左上から順に下→上・フェードイン）
 document.querySelectorAll('.card-grid .card-wrap').forEach(function(wrap, index) {
-  wrap.style.animationDelay = (index * 0.06) + 's';
+  wrap.style.animationDelay = (0.6 + index * 0.06) + 's';
 });
 
 function updateNoResults() {

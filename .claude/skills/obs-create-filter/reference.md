@@ -33,8 +33,6 @@ scripts/
 │   └── {filter-name}-filter.gif     # 使用例GIF（オプション）
 ├── README.md                        # メインREADME（スクリプト一覧）
 ├── LICENSE                          # ライセンスファイル
-└── assets/
-    └── alive-studio-logo.png        # ロゴ画像
 ```
 
 ## 完全な実装例: モザイクフィルター（シンプル）

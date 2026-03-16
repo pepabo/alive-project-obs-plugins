@@ -300,8 +300,6 @@ technique Draw {
 
 ## 提供
 
-[![Alive Studio](../../assets/alive-studio-logo.png)](https://alive-project.com/studio)
-
 © 2025 GMO Pepabo, Inc. All rights reserved.
 ```
 
